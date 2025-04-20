@@ -13,10 +13,13 @@ const NavBar = () => {
             id="home"
             className="p-4 flex h-[10vh] items-center justify-around bg-gray-600"
         >
-            <div className="flex justify-center items-center gap-2 lg:text-3xl text-2xl hover:cursor-default">
+            <NavLink
+                to="/"
+                className="flex justify-center items-center gap-2 lg:text-3xl text-2xl hover:cursor-pointer"
+            >
                 <img src={Icon} alt="Icon" className="size-8 mb-1" />
                 <h1 className="font-bold text-white">Build A Bot</h1>
-            </div>
+            </NavLink>
             <div className="lg:flex hidden gap-10 text-2xl">
                 <NavLink to="/" className={linkClass}>
                     Home
