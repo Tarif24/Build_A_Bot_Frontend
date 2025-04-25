@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NewCollectionForm from "../components/NewCollectionForm";
+import CreateCollectionForm from "../components/CreateCollectionForm";
 import AddDataForm from "../components/AddDataForm";
 import DeleteCollectionForm from "../components/DeleteCollectionForm";
 
@@ -12,7 +12,7 @@ const UploadDataPage = () => {
                 <form>
                     <h1 className="text-3xl font-bold mb-4 text-center">
                         {type === "" && "Upload Data"}
-                        {type === "New-Collection" && "New Collection"}
+                        {type === "Create-Collection" && "Create Collection"}
                         {type === "Add-Data" && "Add Data"}
                         {type === "Delete-Collection" && "Delete Collection"}
                     </h1>
@@ -34,8 +34,8 @@ const UploadDataPage = () => {
                             <option value="" disabled>
                                 Select an action type
                             </option>
-                            <option value="New-Collection">
-                                New Collection
+                            <option value="Create-Collection">
+                                Create Collection
                             </option>
                             <option value="Add-Data">Add Data</option>
                             <option value="Delete-Collection">
@@ -44,7 +44,7 @@ const UploadDataPage = () => {
                         </select>
                     </div>
                 </form>
-                {type === "New-Collection" && <NewCollectionForm />}
+                {type === "Create-Collection" && <CreateCollectionForm />}
                 {type === "Add-Data" && <AddDataForm />}
                 {type === "Delete-Collection" && <DeleteCollectionForm />}
             </div>

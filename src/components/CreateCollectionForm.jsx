@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-const AddDataForm = () => {
+const CreateCollectionForm = () => {
     const [name, setName] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log("Collection deleted:", name);
+        console.log("New Collection Created:", name);
         // Delete the collection from the database using the name
 
         setName("");
@@ -21,33 +21,27 @@ const AddDataForm = () => {
                 >
                     Collection Name
                 </label>
-                <select
+                <input
+                    type="text"
                     id="name"
                     name="name"
                     className="border rounded w-full py-2 px-3"
+                    placeholder="Enter a unique collection name"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                >
-                    {/* fill options with collection names from the database */}
-                    <option value="" disabled>
-                        Select a collection
-                    </option>
-                    <option value="Collection-1">Collection 1</option>
-                    <option value="Collection-2">Collection 2</option>
-                    <option value="Collection-3">Collection 3</option>
-                </select>
+                />
             </div>
             <div>
                 <button
                     className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                     type="submit"
                 >
-                    Add Data
+                    Create Collection
                 </button>
             </div>
         </form>
     );
 };
 
-export default AddDataForm;
+export default CreateCollectionForm;

@@ -31,7 +31,7 @@ const DeleteCollectionForm = () => {
                 >
                     {/* fill options with collection names from the database */}
                     <option value="" disabled>
-                        Select a collection
+                        Select a collection to delete
                     </option>
                     <option value="Collection-1">Collection 1</option>
                     <option value="Collection-2">Collection 2</option>
