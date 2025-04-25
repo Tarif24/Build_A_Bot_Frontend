@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const AddDataForm = () => {
     const [name, setName] = useState("");
@@ -13,6 +14,10 @@ const AddDataForm = () => {
         // Delete the collection from the database using the name
 
         setName("");
+    };
+
+    const handleDeleteURL = (index) => {
+        setURLList((prevList) => prevList.filter((_, i) => i !== index));
     };
 
     const handleAddURL = () => {
@@ -72,16 +77,38 @@ const AddDataForm = () => {
                         type="button"
                         onClick={handleAddURL}
                     >
-                        <CiCirclePlus size="2.5rem" color="black" />
+                        <CiCirclePlus
+                            size="2.5rem"
+                            className="hover:text-gray-500 transition duration-300 ease-in-out"
+                        />
                     </button>
                 </div>
-                <div className="flex flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4">
+                <label
+                    htmlFor="url-list"
+                    className="block text-gray-700 font-bold mb-2"
+                >
+                    URL List
+                </label>
+                <div
+                    className="flex flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4"
+                    id="url-list"
+                    name="url-list"
+                >
                     {URLList.map((url, index) => (
                         <div
                             key={index}
-                            className="bg-gray-200 rounded-full px-4 py-2"
+                            className="relative bg-gray-200 rounded-full px-4 py-2"
                         >
                             {url}
+                            <div
+                                className="absolute right-3 top-0 h-full flex justify-center items-center hover:cursor-pointer transition duration-300 ease-in-out"
+                                onClick={() => handleDeleteURL(index)}
+                            >
+                                <FaRegTrashAlt
+                                    size="1.25rem"
+                                    className="hover:text-red-500 transition duration-300 ease-in-out"
+                                />
+                            </div>
                         </div>
                     ))}
                 </div>
