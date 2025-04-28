@@ -56,7 +56,7 @@ const ChatBotPage = () => {
 
     return (
         <>
-            <div className="flex justify-center items-center gap-8 bg-gray-200 w-full h-[90vh] p-8 border-24 border-white">
+            <div className="flex justify-center items-center gap-8 bg-gray-200 w-full h-[90vh] p-8">
                 <div className="flex flex-col justify-end border-3 rounded-2xl w-[90%] h-[90%] bg-white">
                     <div className="flex flex-grow flex-col overflow-y-auto mx-2 px-10 h-fit max-h-fit">
                         {chatHistory.map(({ role, content }, index) => (
