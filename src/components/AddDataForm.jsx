@@ -85,12 +85,12 @@ const AddDataForm = () => {
                 </div>
                 <label
                     htmlFor="url-list"
-                    className="block text-gray-700 font-bold mb-2"
+                    className={`${URLList.length !== 0? "block" : "hidden"} text-gray-700 font-bold mb-2`}
                 >
                     URL List
                 </label>
                 <div
-                    className="flex flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4"
+                    className={`${URLList.length !== 0? "flex" : "hidden"} flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4`}
                     id="url-list"
                     name="url-list"
                 >
