@@ -8,6 +8,7 @@ import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import ChatBotPage from "./pages/ChatBotPage";
 import UploadDataPage from "./pages/UploadDataPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
     const router = createBrowserRouter(
@@ -16,7 +17,7 @@ function App() {
                 <Route index element={<HomePage />} />
                 <Route path="/chatbot" element={<ChatBotPage />} />
                 <Route path="/uploaddata" element={<UploadDataPage />} />
-                <Route path="*" element={<div>404 Not Found</div>} />
+                <Route path="*" element={<NotFoundPage />} />
             </Route>
         )
     );
