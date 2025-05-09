@@ -27,6 +27,7 @@ const AddDataForm = () => {
 
         if (URLList.length === 0) {
             alert("Please add at least one URL.");
+            setIsLoading(false);
             return;
         }
 

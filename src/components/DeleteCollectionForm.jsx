@@ -1,15 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const DeleteCollectionForm = () => {
+    const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
+
     const [name, setName] = useState("");
+    const [RAGList, setRAGList] = useState([]);
 
-    const handleSubmit = (e) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [shouldFetch, setShouldFetch] = useState(true);
+
+    useEffect(() => {
+        if (shouldFetch) {
+            fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setRAGList(data);
+                    setShouldFetch(false); // Reset after fetching
+                });
+        }
+    }, [shouldFetch]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
-        console.log("Collection deleted:", name);
-        // Delete the collection from the database using the name
+        const responseJSON = await fetch(`${API_URL}/deleteRAGBot`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ collectionName: name }),
+        });
+
+        const response = await responseJSON.json();
+        console.log("Response from server:", response);
 
         setName("");
+        setIsLoading(false);
+        setShouldFetch(true);
     };
 
     return (
@@ -33,14 +61,16 @@ const DeleteCollectionForm = () => {
                     <option value="" disabled>
                         Select a collection to delete
                     </option>
-                    <option value="Collection-1">Collection 1</option>
-                    <option value="Collection-2">Collection 2</option>
-                    <option value="Collection-3">Collection 3</option>
+                    {RAGList.map((rag, index) => (
+                        <option key={index} value={rag}>
+                            {rag}
+                        </option>
+                    ))}
                 </select>
             </div>
             <div>
                 <button
-                    className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                    className="bg-gray-500 hover:bg-gray-600 hover:cursor-pointer text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                     type="submit"
                 >
                     Delete Collection
