@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const AddDataForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -46,7 +47,16 @@ const AddDataForm = () => {
         });
 
         const response = await responseJSON.json();
-        console.log("Response from server:", response);
+
+        if (response.validLinks.length === 0) {
+            toast.error("Failed to add data. No valid links given.");
+        } else if (response.validLinks.length !== URLList.length) {
+            toast.warning(
+                `Data Added To ${name} Successfully, but some links were invalid.`
+            );
+        } else {
+            toast.success(`Data Added To ${name} Successfully`);
+        }
 
         setName("");
         setURLText("");

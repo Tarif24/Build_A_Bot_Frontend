@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const DeleteCollectionForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -34,11 +35,11 @@ const DeleteCollectionForm = () => {
         });
 
         const response = await responseJSON.json();
-        console.log("Response from server:", response);
 
         setName("");
         setIsLoading(false);
         setShouldFetch(true);
+        toast.success(`Deleted RAG Bot ${name} Successfully`);
     };
 
     if (isLoading) {

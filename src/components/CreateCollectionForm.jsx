@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const CreateCollectionForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -40,7 +41,6 @@ const CreateCollectionForm = () => {
         });
 
         const response = await responseJSON.json();
-        console.log("Response from server:", response);
 
         // Reset form fields
         setName("");
@@ -52,6 +52,8 @@ const CreateCollectionForm = () => {
         setURLText("");
         setURLList([]);
         setIsLoading(false);
+
+        toast.success(`Created RAG Bot ${name} Successfully`);
     };
 
     const handleDeleteURL = (index) => {
@@ -265,15 +267,14 @@ const CreateCollectionForm = () => {
             </form>
             {isLoading && (
                 <div className="absolute flex w-[100vw] h-[100vh] -top-4 left-0 justify-center items-center mt-4 bg-black opacity-50">
-                <ClipLoader
-                    color="#6e6e6e"
-                    loading={isLoading}
-                    size={200}
-                    speedMultiplier={1}
-                />
-            </div>
+                    <ClipLoader
+                        color="#6e6e6e"
+                        loading={isLoading}
+                        size={200}
+                        speedMultiplier={1}
+                    />
+                </div>
             )}
-            
         </>
     );
 };
