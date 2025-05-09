@@ -1,19 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 const AddDataForm = () => {
+    const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
+
     const [name, setName] = useState("");
     const [URLText, setURLText] = useState("");
     const [URLList, setURLList] = useState([]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const [RAGList, setRAGList] = useState([]);
 
-        console.log("Data Added To Collection:", name);
-        // Delete the collection from the database using the name
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
+            .then((response) => response.json())
+            .then((data) => {
+                setRAGList(data);
+            });
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        if (URLList.length === 0) {
+            alert("Please add at least one URL.");
+            return;
+        }
+
+        const RAGAddData = {
+            collectionName: name,
+            links: URLList,
+        };
+
+        const responseJSON = await fetch(`${API_URL}/addDataToRAGBot`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(RAGAddData),
+        });
+
+        const response = await responseJSON.json();
+        console.log("Response from server:", response);
 
         setName("");
+        setURLText("");
+        setURLList([]);
+        setIsLoading(false);
     };
 
     const handleDeleteURL = (index) => {
@@ -48,9 +84,11 @@ const AddDataForm = () => {
                     <option value="" disabled>
                         Select a collection
                     </option>
-                    <option value="Collection-1">Collection 1</option>
-                    <option value="Collection-2">Collection 2</option>
-                    <option value="Collection-3">Collection 3</option>
+                    {RAGList.map((rag, index) => (
+                        <option key={index} value={rag}>
+                            {rag}
+                        </option>
+                    ))}
                 </select>
             </div>
             <div>
@@ -85,12 +123,16 @@ const AddDataForm = () => {
                 </div>
                 <label
                     htmlFor="url-list"
-                    className={`${URLList.length !== 0? "block" : "hidden"} text-gray-700 font-bold mb-2`}
+                    className={`${
+                        URLList.length !== 0 ? "block" : "hidden"
+                    } text-gray-700 font-bold mb-2`}
                 >
                     URL List
                 </label>
                 <div
-                    className={`${URLList.length !== 0? "flex" : "hidden"} flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4`}
+                    className={`${
+                        URLList.length !== 0 ? "flex" : "hidden"
+                    } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4`}
                     id="url-list"
                     name="url-list"
                 >
@@ -115,7 +157,7 @@ const AddDataForm = () => {
             </div>
             <div>
                 <button
-                    className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                    className="bg-gray-500 hover:bg-gray-600 hover:cursor-pointer text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                     type="submit"
                 >
                     Add Data

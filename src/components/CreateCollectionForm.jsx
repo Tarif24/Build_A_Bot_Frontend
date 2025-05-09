@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 const CreateCollectionForm = () => {
+    const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
+
     const [name, setName] = useState("");
     const [specialization, setSpecialization] = useState("");
     const [tone, setTone] = useState("");
@@ -12,13 +14,43 @@ const CreateCollectionForm = () => {
     const [URLText, setURLText] = useState("");
     const [URLList, setURLList] = useState([]);
 
-    const handleSubmit = (e) => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
-        console.log("New Collection Created:", name);
-        // Delete the collection from the database using the name
+        const RAGBot = {
+            collectionName: name,
+            specialization: specialization,
+            tone: tone,
+            audience: audience,
+            unknown: unknown,
+            behavior: behavior,
+            links: URLList,
+        };
 
+        const responseJSON = await fetch(`${API_URL}/createRAGBot`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(RAGBot),
+        });
+
+        const response = await responseJSON.json();
+        console.log("Response from server:", response);
+
+        // Reset form fields
         setName("");
+        setSpecialization("");
+        setTone("");
+        setAudience("");
+        setUnknown("");
+        setBehavior("");
+        setURLText("");
+        setURLList([]);
+        setIsLoading(false);
     };
 
     const handleDeleteURL = (index) => {
@@ -215,7 +247,7 @@ const CreateCollectionForm = () => {
             </div>
             <div>
                 <button
-                    className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                    className="bg-gray-500 hover:bg-gray-600 hover:cursor-pointer text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                     type="submit"
                 >
                     Create Collection
