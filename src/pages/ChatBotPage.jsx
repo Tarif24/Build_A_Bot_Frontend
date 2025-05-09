@@ -3,17 +3,32 @@ import { PulseLoader } from "react-spinners";
 import { TypeAnimation } from "react-type-animation";
 
 const ChatBotPage = () => {
+    const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
+
+    const [name, setName] = useState("");
     const [inputText, setInputText] = useState("");
     const [chatHistory, setChatHistory] = useState([]);
     const [isTyping, setIsTyping] = useState(false);
+    const [RAGList, setRAGList] = useState([]);
     const chatEndRef = useRef(null);
-    const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
+
+    useEffect(() => {
+        fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
+            .then((response) => response.json())
+            .then((data) => {
+                setRAGList(data);
+            });
+    }, []);
 
     // Submit form handler
     const submitForm = async (e) => {
         e.preventDefault();
 
         if (inputText.trim() === "") return;
+        if (name === "") {
+            alert("Please select a collection name.");
+            return;
+        }
 
         setInputText((prev) => prev.trim());
 
@@ -24,13 +39,14 @@ const ChatBotPage = () => {
 
         try {
             setIsTyping(true);
-            const responseJSON = await fetch(`${API_URL}/api/query`, {
+            const responseJSON = await fetch(`${API_URL}/query`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     query: inputText,
+                    collectionName: name,
                 }),
             });
 
@@ -49,6 +65,12 @@ const ChatBotPage = () => {
         setInputText("");
     };
 
+    const collectionSwitchHandler = async (e) => {
+        setName(e.target.value);
+        await fetch(`${API_URL}/resetChatHistory`);
+        setChatHistory([]);
+    }
+
     // Scroll to the bottom of the chat history when a new message is added
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -56,7 +78,28 @@ const ChatBotPage = () => {
 
     return (
         <>
-            <div className="flex justify-center items-center gap-8 bg-gray-200 w-full h-[90vh] p-8">
+            <div className="flex flex-col justify-center items-center gap-4 bg-gray-200 w-full h-[90vh] p-8">
+                <div className="flex justify-center items-center gap-4 w-fit mb-4">
+                    <h1 className="text-gray-700 font-bold text-2xl">
+                        Collection Name
+                    </h1>
+                    <select
+                        className="border rounded flex-1 py-2 px-3 bg-white"
+                        required
+                        value={name}
+                        onChange={(e) => collectionSwitchHandler(e)}
+                    >
+                        {/* fill options with collection names from the database */}
+                        <option value="" disabled>
+                            Select a collection
+                        </option>
+                        {RAGList.map((rag, index) => (
+                            <option key={index} value={rag}>
+                                {rag}
+                            </option>
+                        ))}
+                    </select>
+                </div>
                 <div className="flex flex-col justify-end border-3 rounded-2xl w-[90%] h-[90%] bg-white">
                     <div className="flex flex-grow flex-col overflow-y-auto mx-2 px-10 h-fit max-h-fit">
                         {chatHistory.map(({ role, content }, index) => (
