@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
-import { toast } from "react-toastify";
 
 const ViewDataForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -24,34 +23,6 @@ const ViewDataForm = () => {
                 setRAGList(data);
             });
     }, []);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-
-        const RAGBot = {
-            collectionName: name,
-            specialization: specialization,
-            tone: tone,
-            audience: audience,
-            unknown: unknown,
-            behavior: behavior,
-        };
-
-        const responseJSON = await fetch(`${API_URL}/editRAGBot`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(RAGBot),
-        });
-
-        const response = await responseJSON.json();
-
-        toast.success(`Edited RAG Bot ${name} Successfully`);
-
-        setIsLoading(false);
-    };
 
     const nameChangeHandler = async (e) => {
         setName(e.target.value);
@@ -88,7 +59,7 @@ const ViewDataForm = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form className="space-y-4">
                 {/* NAME */}
                 <div className="mb-4">
                     <label

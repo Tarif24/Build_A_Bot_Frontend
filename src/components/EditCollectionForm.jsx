@@ -54,6 +54,7 @@ const EditCollectionForm = () => {
 
     const nameChangeHandler = async (e) => {
         setName(e.target.value);
+        setIsLoading(true);
 
         const responseJSON = await fetch(
             `${API_URL}/getRAGBotInfoByCollectionName`,
@@ -73,7 +74,7 @@ const EditCollectionForm = () => {
         setAudience(response.audience);
         setUnknown(response.unknown);
         setBehavior(response.behavior);
-        setURLList(response.links);
+        setIsLoading(false);
     };
 
     if (isLoading) {
@@ -115,7 +116,7 @@ const EditCollectionForm = () => {
                 </div>
                 <div
                     className={`flex flex-col gap-4 ${
-                        name === "" ? "hidden" : ""
+                        name === "" || isLoading ? "hidden" : ""
                     }`}
                 >
                     {/* SPECIALIZATION */}
