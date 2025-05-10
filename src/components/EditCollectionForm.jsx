@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { CiCirclePlus } from "react-icons/ci";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
@@ -52,17 +50,6 @@ const EditCollectionForm = () => {
         toast.success(`Edited RAG Bot ${name} Successfully`);
 
         setIsLoading(false);
-    };
-
-    const handleDeleteURL = (index) => {
-        setURLList((prevList) => prevList.filter((_, i) => i !== index));
-    };
-
-    const handleAddURL = () => {
-        if (URLText.trim() !== "") {
-            setURLList((prevList) => [...prevList, URLText]);
-        }
-        setURLText("");
     };
 
     const nameChangeHandler = async (e) => {

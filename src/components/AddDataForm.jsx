@@ -11,6 +11,8 @@ const AddDataForm = () => {
     const [URLText, setURLText] = useState("");
     const [URLList, setURLList] = useState([]);
 
+    const [existingURLList, setExistingURLList] = useState([]);
+
     const [RAGList, setRAGList] = useState([]);
 
     const [isLoading, setIsLoading] = useState(false);
@@ -75,6 +77,24 @@ const AddDataForm = () => {
         setURLText("");
     };
 
+    const handleOnNameChange = async (e) => {
+        setName(e.target.value);
+
+        const responseJSON = await fetch(
+            `${API_URL}/getRAGBotInfoByCollectionName`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ collectionName: e.target.value }),
+            }
+        );
+
+        const ragBot = await responseJSON.json();
+        setExistingURLList(ragBot.links);
+    };
+
     if (isLoading) {
         window.scrollTo(0, 0);
         document.body.style.overflow = "hidden";
@@ -85,6 +105,7 @@ const AddDataForm = () => {
     return (
         <>
             <form onSubmit={handleSubmit}>
+                {/* Collection Selector */}
                 <div className="mb-4">
                     <label
                         htmlFor="name"
@@ -98,7 +119,7 @@ const AddDataForm = () => {
                         className="border rounded w-full py-2 px-3"
                         required
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => handleOnNameChange(e)}
                     >
                         {/* fill options with collection names from the database */}
                         <option value="" disabled>
@@ -111,6 +132,34 @@ const AddDataForm = () => {
                         ))}
                     </select>
                 </div>
+                {/* Existing URL List */}
+                <div>
+                    <label
+                        htmlFor="url-list"
+                        className={`${
+                            existingURLList.length !== 0 ? "block" : "hidden"
+                        } text-gray-700 font-bold mb-2`}
+                    >
+                        Existing URL List
+                    </label>
+                    <div
+                        className={`${
+                            existingURLList.length !== 0 ? "flex" : "hidden"
+                        } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4`}
+                        id="url-list"
+                        name="url-list"
+                    >
+                        {existingURLList.map((url, index) => (
+                            <div
+                                key={index}
+                                className="bg-gray-200 rounded-full px-4 py-2"
+                            >
+                                {url}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {/* URL Input */}
                 <div>
                     <label
                         htmlFor="url-input"
