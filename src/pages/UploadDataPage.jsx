@@ -3,6 +3,7 @@ import CreateCollectionForm from "../components/CreateCollectionForm";
 import AddDataForm from "../components/AddDataForm";
 import DeleteCollectionForm from "../components/DeleteCollectionForm";
 import EditCollectionForm from "../components/EditCollectionForm";
+import ViewDataForm from "../components/ViewDataForm";
 
 const UploadDataPage = () => {
     const [type, setType] = useState("");
@@ -16,6 +17,7 @@ const UploadDataPage = () => {
                         {type === "Create-Collection" && "Create Collection"}
                         {type === "Add-Data" && "Add Data"}
                         {type === "Edit-Collection" && "Edit Collection"}
+                        {type === "View-Data" && "View Data"}
                         {type === "Delete-Collection" && "Delete Collection"}
                     </h1>
                     <div className="mb-4">
@@ -43,6 +45,7 @@ const UploadDataPage = () => {
                             <option value="Edit-Collection">
                                 Edit Collection
                             </option>
+                            <option value="View-Data">View Data</option>
                             <option value="Delete-Collection">
                                 Delete Collection
                             </option>
@@ -52,6 +55,7 @@ const UploadDataPage = () => {
                 {type === "Create-Collection" && <CreateCollectionForm />}
                 {type === "Add-Data" && <AddDataForm />}
                 {type === "Edit-Collection" && <EditCollectionForm />}
+                {type === "View-Data" && <ViewDataForm />}
                 {type === "Delete-Collection" && <DeleteCollectionForm />}
             </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
-const EditCollectionForm = () => {
+const ViewDataForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
 
     const [name, setName] = useState("");
@@ -11,6 +11,7 @@ const EditCollectionForm = () => {
     const [audience, setAudience] = useState("");
     const [unknown, setUnknown] = useState("");
     const [behavior, setBehavior] = useState("");
+    const [existingURLList, setExistingURLList] = useState([]);
 
     const [RAGList, setRAGList] = useState([]);
 
@@ -54,6 +55,7 @@ const EditCollectionForm = () => {
 
     const nameChangeHandler = async (e) => {
         setName(e.target.value);
+        setIsLoading(true);
 
         const responseJSON = await fetch(
             `${API_URL}/getRAGBotInfoByCollectionName`,
@@ -73,7 +75,8 @@ const EditCollectionForm = () => {
         setAudience(response.audience);
         setUnknown(response.unknown);
         setBehavior(response.behavior);
-        setURLList(response.links);
+        setExistingURLList(response.links);
+        setIsLoading(false);
     };
 
     if (isLoading) {
@@ -115,7 +118,7 @@ const EditCollectionForm = () => {
                 </div>
                 <div
                     className={`flex flex-col gap-4 ${
-                        name === "" ? "hidden" : ""
+                        name === "" || isLoading ? "hidden" : ""
                     }`}
                 >
                     {/* SPECIALIZATION */}
@@ -126,16 +129,9 @@ const EditCollectionForm = () => {
                         >
                             Specialization
                         </label>
-                        <input
-                            type="text"
-                            id="specialization"
-                            name="specialization"
-                            className="border rounded w-full py-2 px-3"
-                            placeholder="Enter a specialization for the bot"
-                            required
-                            value={specialization}
-                            onChange={(e) => setSpecialization(e.target.value)}
-                        />
+                        <h1 name="specialization" id="specialization">
+                            {specialization}
+                        </h1>
                     </div>
                     {/* TONE */}
                     <div>
@@ -145,16 +141,9 @@ const EditCollectionForm = () => {
                         >
                             Tone
                         </label>
-                        <input
-                            type="text"
-                            id="tone"
-                            name="tone"
-                            className="border rounded w-full py-2 px-3"
-                            placeholder="Enter a tone for the bot"
-                            required
-                            value={tone}
-                            onChange={(e) => setTone(e.target.value)}
-                        />
+                        <h1 name="tone" id="tone">
+                            {tone}
+                        </h1>
                     </div>
                     {/* AUDIENCE */}
                     <div>
@@ -164,16 +153,9 @@ const EditCollectionForm = () => {
                         >
                             Audience
                         </label>
-                        <input
-                            type="text"
-                            id="audience"
-                            name="audience"
-                            className="border rounded w-full py-2 px-3"
-                            placeholder="Enter a audience for the bot"
-                            required
-                            value={audience}
-                            onChange={(e) => setAudience(e.target.value)}
-                        />
+                        <h1 name="audience" id="audience">
+                            {audience}
+                        </h1>
                     </div>
                     {/* UNKNOWN */}
                     <div>
@@ -183,16 +165,9 @@ const EditCollectionForm = () => {
                         >
                             Unknown
                         </label>
-                        <textarea
-                            id="unknown"
-                            name="unknown"
-                            className="border rounded w-full py-2 px-3"
-                            rows="3"
-                            placeholder="Enter what the bot should do when it doesn't know the answer"
-                            required
-                            value={unknown}
-                            onChange={(e) => setUnknown(e.target.value)}
-                        ></textarea>
+                        <h1 name="unknown" id="unknown">
+                            {unknown}
+                        </h1>
                     </div>
                     {/* BEHAVIOR */}
                     <div>
@@ -202,24 +177,38 @@ const EditCollectionForm = () => {
                         >
                             Behavior
                         </label>
-                        <textarea
-                            id="behavior"
-                            name="behavior"
-                            className="border rounded w-full py-2 px-3"
-                            rows="3"
-                            placeholder="Enter a overall behavior for the bot"
-                            required
-                            value={behavior}
-                            onChange={(e) => setBehavior(e.target.value)}
-                        ></textarea>
+                        <h1 name="behavior" id="behavior">
+                            {behavior}
+                        </h1>
                     </div>
+                    {/* Existing URL List */}
                     <div>
-                        <button
-                            className="bg-gray-500 hover:bg-gray-600 hover:cursor-pointer text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                            type="submit"
+                        <label
+                            htmlFor="url-list"
+                            className={`${
+                                existingURLList.length !== 0
+                                    ? "block"
+                                    : "hidden"
+                            } text-gray-700 font-bold mb-2`}
                         >
-                            Edit Collection
-                        </button>
+                            Existing URL List
+                        </label>
+                        <div
+                            className={`${
+                                existingURLList.length !== 0 ? "flex" : "hidden"
+                            } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto`}
+                            id="url-list"
+                            name="url-list"
+                        >
+                            {existingURLList.map((url, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-gray-200 rounded-full px-4 py-2"
+                                >
+                                    {url}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </form>
@@ -237,4 +226,4 @@ const EditCollectionForm = () => {
     );
 };
 
-export default EditCollectionForm;
+export default ViewDataForm;
