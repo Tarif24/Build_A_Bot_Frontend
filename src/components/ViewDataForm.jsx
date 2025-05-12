@@ -39,7 +39,7 @@ const ViewDataForm = () => {
             }
         );
 
-        const response = await responseJSON.json();
+        const response = await responseJSON.json().message;
 
         setSpecialization(response.specialization);
         setTone(response.tone);
