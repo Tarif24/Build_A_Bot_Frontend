@@ -1,4 +1,3 @@
-import React from "react";
 import Icon from "../assets/Chat_Bot_Icon.svg";
 import { NavLink } from "react-router-dom";
 

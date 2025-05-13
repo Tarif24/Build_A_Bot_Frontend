@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 const EditCollectionForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
 
+    // state to hold the form input values
     const [name, setName] = useState("");
     const [specialization, setSpecialization] = useState("");
     const [tone, setTone] = useState("");
@@ -12,10 +13,13 @@ const EditCollectionForm = () => {
     const [unknown, setUnknown] = useState("");
     const [behavior, setBehavior] = useState("");
 
+    // state to hold the list of collections from the database
     const [RAGList, setRAGList] = useState([]);
 
+    // state to handle loading state
     const [isLoading, setIsLoading] = useState(false);
 
+    // fetch the list of collections from the database
     useEffect(() => {
         fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
             .then((response) => response.json())
@@ -69,6 +73,7 @@ const EditCollectionForm = () => {
 
         const response = await responseJSON.json().message;
 
+        // set the form input values with the data of the given RAG Bot
         setSpecialization(response.specialization);
         setTone(response.tone);
         setAudience(response.audience);

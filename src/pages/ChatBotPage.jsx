@@ -1,17 +1,27 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { PulseLoader } from "react-spinners";
 import { TypeAnimation } from "react-type-animation";
 
 const ChatBotPage = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
 
+    // State to hold the selected collection name
     const [name, setName] = useState("");
+
+    // State to hold the input text and typing status
     const [inputText, setInputText] = useState("");
-    const [chatHistory, setChatHistory] = useState([]);
     const [isTyping, setIsTyping] = useState(false);
+
+    // State to hold the chat history
+    const [chatHistory, setChatHistory] = useState([]);
+
+    // State to hold the list of collection names
     const [RAGList, setRAGList] = useState([]);
+
+    // Reference to the end of the chat history for scrolling
     const chatEndRef = useRef(null);
 
+    // Fetch all collection names from the database
     useEffect(() => {
         fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
             .then((response) => response.json())
@@ -69,7 +79,7 @@ const ChatBotPage = () => {
         setName(e.target.value);
         await fetch(`${API_URL}/resetChatHistory`);
         setChatHistory([]);
-    }
+    };
 
     // Scroll to the bottom of the chat history when a new message is added
     useEffect(() => {
@@ -89,7 +99,6 @@ const ChatBotPage = () => {
                         value={name}
                         onChange={(e) => collectionSwitchHandler(e)}
                     >
-                        {/* fill options with collection names from the database */}
                         <option value="" disabled>
                             Select a collection
                         </option>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 const CreateCollectionForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
 
+    // State to hold the form input values
     const [name, setName] = useState("");
     const [specialization, setSpecialization] = useState("");
     const [tone, setTone] = useState("");
@@ -16,6 +17,7 @@ const CreateCollectionForm = () => {
     const [URLText, setURLText] = useState("");
     const [URLList, setURLList] = useState([]);
 
+    // State to manage loading state
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e) => {

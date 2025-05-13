@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 const DeleteCollectionForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
 
+    // state to hold the form input values
     const [name, setName] = useState("");
     const [RAGList, setRAGList] = useState([]);
 
+    // state to handle loading state
     const [isLoading, setIsLoading] = useState(false);
     const [shouldFetch, setShouldFetch] = useState(true);
 
+    // fetch the list of collections from the database
     useEffect(() => {
         if (shouldFetch) {
             fetch(`${API_URL}/getAllRAGBotCollectionsByName`)

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CreateCollectionForm from "../components/CreateCollectionForm";
 import AddDataForm from "../components/AddDataForm";
 import DeleteCollectionForm from "../components/DeleteCollectionForm";
@@ -6,6 +6,7 @@ import EditCollectionForm from "../components/EditCollectionForm";
 import ViewDataForm from "../components/ViewDataForm";
 
 const UploadDataPage = () => {
+    // selected type of action state
     const [type, setType] = useState("");
 
     return (
@@ -13,6 +14,7 @@ const UploadDataPage = () => {
             <div className="w-full max-w-[40rem] bg-gray-100 rounded-4xl border-2 px-8 pt-6 pb-8 mb-4">
                 <form>
                     <h1 className="text-3xl font-bold mb-4 text-center">
+                        {/* switches name based on selected choice */}
                         {type === "" && "Upload Data"}
                         {type === "Create-Collection" && "Create Collection"}
                         {type === "Add-Data" && "Add Data"}
@@ -52,6 +54,7 @@ const UploadDataPage = () => {
                         </select>
                     </div>
                 </form>
+                {/* switches form based on selected choice */}
                 {type === "Create-Collection" && <CreateCollectionForm />}
                 {type === "Add-Data" && <AddDataForm />}
                 {type === "Edit-Collection" && <EditCollectionForm />}

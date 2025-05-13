@@ -7,16 +7,21 @@ import { toast } from "react-toastify";
 const AddDataForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
 
+    // state to hold the form input valuess
     const [name, setName] = useState("");
     const [URLText, setURLText] = useState("");
     const [URLList, setURLList] = useState([]);
 
+    // state to hold the existing URL list
     const [existingURLList, setExistingURLList] = useState([]);
 
+    // state to hold the list of collections from the database
     const [RAGList, setRAGList] = useState([]);
 
+    // state to handle loading state
     const [isLoading, setIsLoading] = useState(false);
 
+    // fetch the list of collections from the database
     useEffect(() => {
         fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
             .then((response) => response.json())
@@ -60,6 +65,7 @@ const AddDataForm = () => {
             toast.success(`Data Added To ${name} Successfully`);
         }
 
+        // reset the form input values
         setName("");
         setURLText("");
         setURLList([]);
