@@ -1,9 +1,18 @@
+import Hero from "../components/Hero";
+import Question from "../components/Question";
+
 const HomePage = () => {
     return (
-        <div className="flex justify-center items-center w-full h-[90vh] min-h-fit bg-gray-200">
-            <h1 className="text-8xl font-bold text-black text-center">
-                Welcome To Build A Bot
-            </h1>
+        <div className="flex flex-col justify-center items-center bg-gray-200">
+            <Hero />
+            <Question
+                question="What is Build A Bot?"
+                answer="The capital of France is Paris."
+            />
+            <Question
+                question="What is RAG Bot?"
+                answer="The capital of France is Paris."
+            />
         </div>
     );
 };
