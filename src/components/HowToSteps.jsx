@@ -1,11 +1,22 @@
 import React from "react";
 
-const HowToSteps = ({ listOfSteps }) => {
+const HowToSteps = ({
+    listOfSteps,
+    title = "How To Build A Bot?",
+    description = "",
+}) => {
     return (
         <div className="flex flex-col justify-center items-center w-full h-[90vh] min-h-fit bg-gray-200">
             <div className="flex flex-col justify-center gap-12 items-center w-[80%] min-h-fit">
                 <h1 className="text-6xl font-semibold text-left w-full">
-                    How To Steps
+                    {title || "How To Build A Bot?"}
+                </h1>
+                <h1
+                    className={`${
+                        description === "" ? "hidden" : ""
+                    } text-2xl text-left w-full`}
+                >
+                    {description}
                 </h1>
                 {listOfSteps.map((step, index) => (
                     <div

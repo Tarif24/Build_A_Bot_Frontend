@@ -16,7 +16,7 @@ function App() {
             <Route path="/" element={<MainLayout />}>
                 <Route index element={<HomePage />} />
                 <Route path="/chatbot" element={<ChatBotPage />} />
-                <Route path="/uploaddata" element={<UploadDataPage />} />
+                <Route path="/data" element={<UploadDataPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Route>
         )

@@ -26,8 +26,8 @@ const NavBar = () => {
                 <NavLink to="/chatbot" className={linkClass}>
                     Chat Bot
                 </NavLink>
-                <NavLink to="/uploaddata" className={linkClass}>
-                    Upload Data
+                <NavLink to="/data" className={linkClass}>
+                    Data
                 </NavLink>
             </div>
         </nav>
