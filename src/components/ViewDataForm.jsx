@@ -43,15 +43,16 @@ const ViewDataForm = () => {
             }
         );
 
-        const response = await responseJSON.json().message;
+        const response = await responseJSON.json();
+        const ragbot = response.message;
 
         // set the form input values with the data of the given RAG Bot
-        setSpecialization(response.specialization);
-        setTone(response.tone);
-        setAudience(response.audience);
-        setUnknown(response.unknown);
-        setBehavior(response.behavior);
-        setExistingURLList(response.links);
+        setSpecialization(ragbot.specialization);
+        setTone(ragbot.tone);
+        setAudience(ragbot.audience);
+        setUnknown(ragbot.unknown);
+        setBehavior(ragbot.behavior);
+        setExistingURLList(ragbot.links);
         setIsLoading(false);
     };
 
