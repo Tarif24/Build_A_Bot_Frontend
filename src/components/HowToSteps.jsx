@@ -6,7 +6,7 @@ const HowToSteps = ({
     description = "",
 }) => {
     return (
-        <div className="flex flex-col justify-center items-center w-full h-[90vh] min-h-fit bg-gray-200">
+        <div className="flex flex-col justify-center items-center w-full h-[100vh] min-h-fit bg-gray-200">
             <div className="flex flex-col justify-center gap-12 items-center w-[80%] min-h-fit">
                 <h1 className="text-6xl font-semibold text-left w-full">
                     {title || "How To Build A Bot?"}
