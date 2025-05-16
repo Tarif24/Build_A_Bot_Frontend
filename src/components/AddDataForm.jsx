@@ -181,6 +181,7 @@ const AddDataForm = () => {
                         <input
                             type="text"
                             placeholder="Add the URL to your data..."
+                            autoComplete="off"
                             className="relative h-full px-5 w-full focus:outline-none rounded-[5rem]"
                             value={URLText}
                             onChange={(e) => setURLText(e.target.value)}

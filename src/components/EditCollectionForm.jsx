@@ -138,6 +138,7 @@ const EditCollectionForm = () => {
                             name="specialization"
                             className="border rounded w-full py-2 px-3"
                             placeholder="Enter a specialization for the bot"
+                            autoComplete="off"
                             required
                             value={specialization}
                             onChange={(e) => setSpecialization(e.target.value)}
@@ -157,6 +158,7 @@ const EditCollectionForm = () => {
                             name="tone"
                             className="border rounded w-full py-2 px-3"
                             placeholder="Enter a tone for the bot"
+                            autoComplete="off"
                             required
                             value={tone}
                             onChange={(e) => setTone(e.target.value)}
@@ -176,6 +178,7 @@ const EditCollectionForm = () => {
                             name="audience"
                             className="border rounded w-full py-2 px-3"
                             placeholder="Enter a audience for the bot"
+                            autoComplete="off"
                             required
                             value={audience}
                             onChange={(e) => setAudience(e.target.value)}

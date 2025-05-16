@@ -93,6 +93,7 @@ const CreateCollectionForm = () => {
                         name="name"
                         className="border rounded w-full py-2 px-3"
                         placeholder="Enter a unique collection name"
+                        autoComplete="off"
                         required
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -112,6 +113,7 @@ const CreateCollectionForm = () => {
                         name="specialization"
                         className="border rounded w-full py-2 px-3"
                         placeholder="Enter a specialization for the bot"
+                        autoComplete="off"
                         required
                         value={specialization}
                         onChange={(e) => setSpecialization(e.target.value)}
@@ -131,6 +133,7 @@ const CreateCollectionForm = () => {
                         name="tone"
                         className="border rounded w-full py-2 px-3"
                         placeholder="Enter a tone for the bot"
+                        autoComplete="off"
                         required
                         value={tone}
                         onChange={(e) => setTone(e.target.value)}
@@ -150,6 +153,7 @@ const CreateCollectionForm = () => {
                         name="audience"
                         className="border rounded w-full py-2 px-3"
                         placeholder="Enter a audience for the bot"
+                        autoComplete="off"
                         required
                         value={audience}
                         onChange={(e) => setAudience(e.target.value)}
@@ -209,6 +213,7 @@ const CreateCollectionForm = () => {
                         <input
                             type="text"
                             placeholder="Add the URL to your data..."
+                            autoComplete="off"
                             className="relative h-full px-5 w-full focus:outline-none rounded-[5rem]"
                             value={URLText}
                             onChange={(e) => setURLText(e.target.value)}
