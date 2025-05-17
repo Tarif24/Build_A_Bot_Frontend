@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const AddDataForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
 
-    // state to hold the form input valuess
+    // state to hold the form input values
     const [name, setName] = useState("");
     const [URLText, setURLText] = useState("");
     const [URLList, setURLList] = useState([]);
@@ -98,7 +98,8 @@ const AddDataForm = () => {
         );
 
         const ragBot = await responseJSON.json();
-        setExistingURLList(ragBot.links);
+        console.log(ragBot);
+        setExistingURLList(ragBot.message.links);
     };
 
     if (isLoading) {
