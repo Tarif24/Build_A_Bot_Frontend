@@ -98,7 +98,6 @@ const AddDataForm = () => {
         );
 
         const ragBot = await responseJSON.json();
-        console.log(ragBot);
         setExistingURLList(ragBot.message.links);
     };
 
