@@ -1,11 +1,34 @@
 import Hero from "../components/Hero";
 import Question from "../components/Question";
 import HowToSteps from "../components/HowToSteps";
+import ChatTextDisplay from "../components/ChatTextDisplay";
 
 const HomePage = () => {
     return (
         <div className="flex flex-col justify-center items-center bg-gray-200">
             <Hero />
+
+            <ChatTextDisplay
+                question={"What is Build A Bot?"}
+                chatHistory={[
+                    { role: "user", content: "What is Build A Bot?" },
+                    {
+                        role: "assistant",
+                        content:
+                            "Build A Bot empowers you to create fully customized, intelligent chat bots tailored to your specific domain or audience. Unlike generic AI assistants, Build A Bot leverages Retrieval Augmented Generation (RAG) technology allowing you to link external data sources such as Wikipedia pages and websites directly into your bot's knowledge base.",
+                    },
+                    {
+                        role: "assistant",
+                        content:
+                            "This means your bot doesn’t just rely on pre-trained knowledge it references your curated data to deliver accurate, context-aware responses. Whether you're building a support assistant for your product, an educational tutor for a niche topic, or an internal tool for company knowledge, Build A Bot gives you the tools to design a chatbot that speaks your language and understands your content.",
+                    },
+                    {
+                        role: "assistant",
+                        content:
+                            "Craft smart, topic-specific bots that are not only conversational, but also deeply informed by the information you provide.",
+                    },
+                ]}
+            />
 
             <Question
                 question="What Is Build A Bot?"
