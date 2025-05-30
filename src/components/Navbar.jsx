@@ -1,5 +1,6 @@
 import Icon from "../assets/Chat_Bot_Icon.svg";
 import { NavLink } from "react-router-dom";
+import HamburgerNav from "./HamburgerNav";
 
 const NavBar = () => {
     const linkClass = ({ isActive }) =>
@@ -30,6 +31,7 @@ const NavBar = () => {
                     Data
                 </NavLink>
             </div>
+            <HamburgerNav />
         </nav>
     );
 };
