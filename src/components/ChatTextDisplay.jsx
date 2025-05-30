@@ -1,10 +1,14 @@
-const ChatTextDisplay = ({ question, chatHistory = [] }) => {
+const ChatTextDisplay = ({ question, chatHistory = [], flip = false }) => {
     return (
-        <div className="flex flex-col gap-12 justify-center items-center min-h-fit bg-gray-200">
-            <h1 className="text-6xl font-semibold text-left w-[90%] min-h-fit">
+        <div
+            className={`flex ${
+                flip ? "flex-row-reverse" : "flex-row"
+            } gap-12 justify-center w-full items-center min-h-fit bg-gray-200 px-10`}
+        >
+            <h1 className="flex-1/3 text-6xl font-semibold text-center min-h-fit">
                 {question}
             </h1>
-            <div className="flex flex-col border-3 rounded-2xl w-[90%] bg-white">
+            <div className="flex-2/3 flex flex-col border-2 rounded-2xl bg-white">
                 <div className="flex flex-grow flex-col overflow-y-auto mx-2 px-10 h-fit max-h-fit">
                     {chatHistory.map(({ role, content }, index) => (
                         <div
@@ -15,7 +19,7 @@ const ChatTextDisplay = ({ question, chatHistory = [] }) => {
                             }`}
                             key={index}
                         >
-                            <h1 className="text-2xl">{content}</h1>
+                            <h1 className="text-[1.2rem]">{content}</h1>
                         </div>
                     ))}
                 </div>
