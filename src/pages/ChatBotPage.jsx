@@ -88,8 +88,8 @@ const ChatBotPage = () => {
 
     return (
         <>
-            <div className="flex flex-col justify-center items-center gap-4 bg-gray-200 w-full h-[90vh] p-8">
-                <div className="flex justify-center items-center gap-4 w-fit mb-4">
+            <div className="flex flex-col justify-center items-center gap-4 bg-gray-200 w-full h-[90vh] pb-2 sm:pb-0 sm:p-8">
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 w-fit pt-2 sm:pt-0 sm:pb-4">
                     <h1 className="text-gray-700 font-bold text-2xl">
                         Collection Name
                     </h1>
@@ -109,18 +109,18 @@ const ChatBotPage = () => {
                         ))}
                     </select>
                 </div>
-                <div className="flex flex-col justify-end border-3 rounded-2xl w-[90%] h-[90%] bg-white">
-                    <div className="flex flex-grow flex-col overflow-y-auto mx-2 px-10 h-fit max-h-fit">
+                <div className="flex flex-col justify-end border-2 sm:border-3 rounded-2xl w-[95%] sm:w-[90%] h-[90%] bg-white">
+                    <div className="flex flex-grow flex-col overflow-y-auto px-2 sm:px-10 h-fit max-h-fit">
                         {chatHistory.map(({ role, content }, index) => (
                             <div
-                                className={`w-fit max-w-[60%] mt-4 p-4 break-words ${
+                                className={`w-fit max-w-[70%] sm:max-w-[60%] mt-2 sm:mt-4 p-3 sm:p-4 break-words ${
                                     role === "user"
                                         ? "self-end rounded-l-2xl rounded-tr-2xl bg-blue-500 text-white"
                                         : "self-start rounded-r-2xl rounded-tl-2xl bg-gray-200 text-black"
                                 }`}
                                 key={index}
                             >
-                                <h1 className="">
+                                <h1 className="text-[0.8rem] sm:text-[1.2rem]">
                                     {role === "assistant" ? (
                                         <TypeAnimation
                                             sequence={[content]}
