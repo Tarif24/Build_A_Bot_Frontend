@@ -10,19 +10,19 @@ const UploadDataPage = () => {
     const [type, setType] = useState("");
 
     return (
-        <div className="flex flex-col justify-center items-center w-full h-[90vh] min-h-fit p-24 bg-gray-200">
-            <div className="w-full max-w-[40rem] bg-gray-100 rounded-4xl border-2 px-8 pt-6 pb-8 mb-4">
+        <div className="flex flex-col justify-center items-center w-full h-[90vh] min-h-fit sm:p-24 bg-gray-200">
+            <div className="w-full max-w-[95%] h-full sm:h-fit sm:max-w-[40rem] bg-gray-100 rounded-4xl border-2 px-8 pt-6 pb-8 mb-4 mt-4">
                 <form>
                     <h1 className="text-3xl font-bold mb-4 text-center">
                         {/* switches name based on selected choice */}
-                        {type === "" && "Upload Data"}
+                        {type === "" && "Data"}
                         {type === "Create-Collection" && "Create Collection"}
                         {type === "Add-Data" && "Add Data"}
                         {type === "Edit-Collection" && "Edit Collection"}
                         {type === "View-Data" && "View Data"}
                         {type === "Delete-Collection" && "Delete Collection"}
                     </h1>
-                    <div className="mb-4">
+                    <div className="mb-4 w-full">
                         <label
                             htmlFor="type"
                             className="block text-gray-700 font-bold mb-2"

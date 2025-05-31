@@ -88,7 +88,7 @@ const ChatBotPage = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center gap-4 bg-gray-200 w-full h-[90vh] pb-2 sm:pb-0 sm:p-8 overflow-hidden">
+            <div className="flex flex-col items-center gap-4 bg-gray-200 w-full h-[90vh] pb-2 sm:pb-0 sm:p-8">
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 w-fit pt-2 sm:pt-0 sm:pb-4">
                     <h1 className="text-gray-700 font-bold text-2xl">
                         Collection Name
@@ -109,7 +109,7 @@ const ChatBotPage = () => {
                         ))}
                     </select>
                 </div>
-                <div className="flex flex-col justify-end border-2 sm:border-3 rounded-2xl w-[95%] sm:w-[90%] h-[90%] max-h-[90%] bg-white">
+                <div className="flex flex-col justify-end border-2 sm:border-3 rounded-2xl w-[95%] sm:w-[90%] h-[90%] max-h-[90%] bg-white sm:mb-4">
                     <div className="flex flex-grow flex-col overflow-y-auto px-2 sm:px-10 h-fit max-h-fit">
                         {chatHistory.map(({ role, content }, index) => (
                             <div
