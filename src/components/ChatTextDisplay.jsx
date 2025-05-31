@@ -2,24 +2,26 @@ const ChatTextDisplay = ({ question, chatHistory = [], flip = false }) => {
     return (
         <div
             className={`flex ${
-                flip ? "flex-row-reverse" : "flex-row"
-            } gap-12 justify-center w-full items-center min-h-fit bg-gray-200 px-10`}
+                flip ? "flex-col sm:flex-row-reverse" : "flex-col sm:flex-row"
+            } gap-12 justify-center w-full items-center min-h-fit bg-gray-200 sm:px-10`}
         >
-            <h1 className="flex-1/3 text-6xl font-semibold text-center min-h-fit">
+            <h1 className="sm:flex-1/3 text-4xl sm:text-6xl font-semibold text-center min-h-fit">
                 {question}
             </h1>
-            <div className="flex-2/3 flex flex-col border-2 rounded-2xl bg-white">
-                <div className="flex flex-grow flex-col overflow-y-auto mx-2 px-10 h-fit max-h-fit">
+            <div className="sm:flex-2/3 flex flex-col border-2 rounded-2xl bg-white w-[95%]">
+                <div className="flex flex-col overflow-y-auto px-2 sm:px-10 h-fit max-h-fit">
                     {chatHistory.map(({ role, content }, index) => (
                         <div
-                            className={`w-fit max-w-[60%] mt-4 p-4 break-words ${
+                            className={`w-fit max-w-[70%] sm:max-w-[60%] mt-2 sm:mt-4 p-4 break-words ${
                                 role === "user"
                                     ? "self-end rounded-l-2xl rounded-tr-2xl bg-blue-500 text-white"
                                     : "self-start rounded-r-2xl rounded-tl-2xl bg-gray-200 text-black"
                             }`}
                             key={index}
                         >
-                            <h1 className="text-[1.2rem]">{content}</h1>
+                            <h1 className="text-[0.8rem] sm:text-[1.2rem]">
+                                {content}
+                            </h1>
                         </div>
                     ))}
                 </div>
