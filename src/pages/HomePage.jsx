@@ -2,6 +2,8 @@ import Hero from "../components/Hero";
 import ChatTextDisplay from "../components/ChatTextDisplay";
 
 const HomePage = () => {
+    document.body.style.overflow = "auto";
+
     return (
         <div className="flex flex-col justify-center items-center bg-gray-200">
             <Hero />
