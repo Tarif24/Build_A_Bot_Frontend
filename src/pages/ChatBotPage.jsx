@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { PulseLoader } from "react-spinners";
 import { TypeAnimation } from "react-type-animation";
+import { toast } from "react-toastify";
 
 const ChatBotPage = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -36,7 +37,7 @@ const ChatBotPage = () => {
 
         if (inputText.trim() === "") return;
         if (name === "") {
-            alert("Please select a collection name.");
+            toast.error("Please select a collection name.");
             return;
         }
 
