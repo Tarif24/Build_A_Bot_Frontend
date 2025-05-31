@@ -43,9 +43,12 @@ const ChatBotPage = () => {
 
         setInputText((prev) => prev.trim());
 
+        const input = inputText;
+        setInputText("");
+
         setChatHistory((prev) => [
             ...prev,
-            { role: "user", content: `${inputText}` },
+            { role: "user", content: `${input}` },
         ]);
 
         try {
@@ -56,7 +59,7 @@ const ChatBotPage = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    query: inputText,
+                    query: input,
                     collectionName: name,
                 }),
             });
@@ -72,8 +75,6 @@ const ChatBotPage = () => {
         } finally {
             setIsTyping(false);
         }
-
-        setInputText("");
     };
 
     const collectionSwitchHandler = async (e) => {
@@ -89,8 +90,8 @@ const ChatBotPage = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center gap-4 bg-gray-200 w-full h-[90vh] pb-2 sm:pb-0 sm:p-8">
-                <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 w-fit pt-2 sm:pt-0 sm:pb-4">
+            <div className="flex flex-col items-center justify-between gap-4 bg-gray-200 w-full h-[90vh] pb-2 sm:pb-0 sm:p-8">
+                <div className="flex flex-grow flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 w-fit pt-2 sm:pt-0 sm:pb-4">
                     <h1 className="text-gray-700 font-bold text-2xl">
                         Collection Name
                     </h1>
@@ -110,8 +111,8 @@ const ChatBotPage = () => {
                         ))}
                     </select>
                 </div>
-                <div className="flex flex-col justify-end border-2 sm:border-3 rounded-2xl w-[95%] sm:w-[90%] h-[90%] max-h-[90%] bg-white sm:mb-4">
-                    <div className="flex flex-grow flex-col overflow-y-auto px-2 sm:px-10 h-fit max-h-fit">
+                <div className="flex flex-col justify-end border-2 sm:border-3 rounded-2xl w-[95%] sm:w-[90%] h-[85%] max-h-[85%] bg-white sm:mb-4">
+                    <div className="flex flex-col overflow-y-auto px-2 sm:px-10">
                         {chatHistory.map(({ role, content }, index) => (
                             <div
                                 className={`w-fit max-w-[70%] sm:max-w-[60%] mt-2 sm:mt-4 p-3 sm:p-4 break-words ${

@@ -118,27 +118,27 @@ const HomePage = () => {
                         {
                             role: "assistant",
                             content:
-                                "- Add Data to your collection by going to the Data page and selection Add Data",
+                                "Add Data to your collection by going to the Data page and selection Add Data",
                         },
                         {
                             role: "assistant",
                             content:
-                                "- Edit collection by going to the Data page and selecting Edit Collection",
+                                "Edit collection by going to the Data page and selecting Edit Collection",
                         },
                         {
                             role: "assistant",
                             content:
-                                "- View the custom behavior of your bot by going to the Data page and selecting View Data",
+                                "View the custom behavior of your bot by going to the Data page and selecting View Data",
                         },
                         {
                             role: "assistant",
                             content:
-                                "- Delete collection by going to the Data page and selecting Delete Collection",
+                                "Delete collection by going to the Data page and selecting Delete Collection",
                         },
                         {
                             role: "assistant",
                             content:
-                                "- Create a whole new RAG Bot by going to the Data page and selecting Create Collection",
+                                "Create a whole new RAG Bot by going to the Data page and selecting Create Collection",
                         },
                     ]}
                 />
