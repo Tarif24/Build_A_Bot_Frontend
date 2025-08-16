@@ -1,11 +1,13 @@
 import Hero from "../components/Hero";
 import ChatTextDisplay from "../components/ChatTextDisplay";
+import PDFInput from "../components/PDFInput";
 
 const HomePage = () => {
     document.body.style.overflow = "auto";
 
     return (
         <div className="flex flex-col justify-center items-center bg-gray-200">
+            <PDFInput />
             <Hero />
 
             <div className="flex flex-col justify-center items-center gap-50 my-50">
