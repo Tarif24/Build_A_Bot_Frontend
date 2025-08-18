@@ -3,6 +3,7 @@ import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import PDFInput from "../components/PDFInput";
 
 const CreateCollectionForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -263,6 +264,13 @@ const CreateCollectionForm = () => {
                         ))}
                     </div>
                 </div>
+
+                {/* PDF Input */}
+                <div>
+                    <PDFInput />
+                </div>
+
+                {/* Submit Button */}
                 <div>
                     <button
                         className="bg-gray-500 hover:bg-gray-600 hover:cursor-pointer text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"

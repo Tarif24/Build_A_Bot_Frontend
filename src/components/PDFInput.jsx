@@ -77,12 +77,6 @@ export default function PDFInput() {
 
             return newCount;
         });
-
-        // Only hide drag overlay when counter reaches 0
-        // This prevents flickering when dragging over child elements
-        if (dragCounter === 0) {
-            setIsDragOver(false);
-        }
     };
 
     const handleDragOver = (e) => {
