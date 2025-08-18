@@ -1,16 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { LuUpload } from "react-icons/lu";
 import { CiFileOn } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 
-export default function PDFInput() {
+export default function PDFInput({ onPDFInputChange }) {
     const [previewFile, setPreviewFile] = useState(null);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [dragCounter, setDragCounter] = useState(0);
     const [isDragOver, setIsDragOver] = useState(false);
     const dropZoneRef = useRef(null);
     const fileInputRef = useRef(null);
+
+    useEffect(() => {
+        onPDFInputChange(selectedFiles);
+    }, [selectedFiles]);
 
     const handleFileChange = (filesList) => {
         const files = Array.from(filesList);
@@ -42,6 +46,7 @@ export default function PDFInput() {
             if (fileToRemove) {
                 URL.revokeObjectURL(fileToRemove.previewUrl);
             }
+
             return updated;
         });
     };

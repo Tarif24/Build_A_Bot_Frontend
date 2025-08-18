@@ -17,6 +17,7 @@ const CreateCollectionForm = () => {
     const [behavior, setBehavior] = useState("");
     const [URLText, setURLText] = useState("");
     const [URLList, setURLList] = useState([]);
+    const [pdfFiles, setPdfFiles] = useState([]);
 
     // State to manage loading state
     const [isLoading, setIsLoading] = useState(false);
@@ -68,6 +69,10 @@ const CreateCollectionForm = () => {
             setURLList((prevList) => [...prevList, URLText]);
         }
         setURLText("");
+    };
+
+    const handlePDFInputChange = (filesList) => {
+        setPdfFiles(filesList);
     };
 
     if (isLoading) {
@@ -267,7 +272,7 @@ const CreateCollectionForm = () => {
 
                 {/* PDF Input */}
                 <div>
-                    <PDFInput />
+                    <PDFInput onPDFInputChange={handlePDFInputChange} />
                 </div>
 
                 {/* Submit Button */}

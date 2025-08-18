@@ -12,6 +12,7 @@ const AddDataForm = () => {
     const [name, setName] = useState("");
     const [URLText, setURLText] = useState("");
     const [URLList, setURLList] = useState([]);
+    const [pdfFiles, setPdfFiles] = useState([]);
 
     // state to hold the existing URL list
     const [existingURLList, setExistingURLList] = useState([]);
@@ -100,6 +101,12 @@ const AddDataForm = () => {
 
         const ragBot = await responseJSON.json();
         setExistingURLList(ragBot.message.links);
+    };
+
+    const handlePDFInputChange = (filesList) => {
+        setPdfFiles(filesList);
+
+        console.log("PDF Files:", filesList);
     };
 
     if (isLoading) {
@@ -235,7 +242,7 @@ const AddDataForm = () => {
 
                 {/* PDF Input */}
                 <div>
-                    <PDFInput />
+                    <PDFInput onPDFInputChange={handlePDFInputChange} />
                 </div>
 
                 {/* Submit Button */}
