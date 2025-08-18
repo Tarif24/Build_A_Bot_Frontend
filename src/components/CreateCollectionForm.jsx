@@ -211,11 +211,7 @@ const CreateCollectionForm = () => {
                     >
                         URL Input
                     </label>
-                    <div
-                        className="relative h-[3rem] w-full border-1 border-black rounded mb-4"
-                        id="url-input"
-                        name="url-input"
-                    >
+                    <div className="relative h-[3rem] w-full border-1 border-black rounded mb-4">
                         <input
                             type="text"
                             placeholder="Add the URL to your data..."
@@ -223,6 +219,8 @@ const CreateCollectionForm = () => {
                             className="relative h-full px-5 w-full focus:outline-none rounded-[5rem]"
                             value={URLText}
                             onChange={(e) => setURLText(e.target.value)}
+                            id="url-input"
+                            name="url-input"
                         />
                         <button
                             className="absolute right-2 top-0 h-full hover:cursor-pointer transition duration-300 ease-in-out"
@@ -236,7 +234,6 @@ const CreateCollectionForm = () => {
                         </button>
                     </div>
                     <label
-                        htmlFor="url-list"
                         className={`${
                             URLList.length !== 0 ? "block" : "hidden"
                         } text-gray-700 font-bold mb-2`}

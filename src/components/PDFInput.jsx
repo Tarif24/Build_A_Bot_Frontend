@@ -107,6 +107,12 @@ export default function PDFInput({ onPDFInputChange }) {
         fileInputRef.current?.click();
     };
 
+    if (previewFile) {
+        document.body.style.overflow = "hidden";
+    } else {
+        document.body.style.overflow = "auto";
+    }
+
     return (
         <div>
             {/* PDF UPLOAD */}
@@ -174,6 +180,7 @@ export default function PDFInput({ onPDFInputChange }) {
                                         onClick={() => handlePreview(fileData)}
                                         className="p-2 text-blue-400 hover:bg-blue-100 rounded-full transition-colors hover:cursor-pointer"
                                         title="Preview"
+                                        type="button"
                                     >
                                         <IoEyeOutline size="1rem" />
                                     </button>
@@ -181,6 +188,7 @@ export default function PDFInput({ onPDFInputChange }) {
                                         onClick={() => removeFile(fileData.id)}
                                         className="p-2 text-red-400 hover:bg-red-100 rounded-full transition-colors hover:cursor-pointer"
                                         title="Remove"
+                                        type="button"
                                     >
                                         <IoMdClose size="1rem" />
                                     </button>

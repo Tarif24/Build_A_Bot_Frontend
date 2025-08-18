@@ -105,8 +105,6 @@ const AddDataForm = () => {
 
     const handlePDFInputChange = (filesList) => {
         setPdfFiles(filesList);
-
-        console.log("PDF Files:", filesList);
     };
 
     if (isLoading) {
