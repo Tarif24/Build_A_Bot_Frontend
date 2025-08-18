@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { LuUpload } from "react-icons/lu";
 import { CiFileOn } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
@@ -7,9 +7,13 @@ import { IoMdClose } from "react-icons/io";
 export default function PDFInput() {
     const [previewFile, setPreviewFile] = useState(null);
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const [dragCounter, setDragCounter] = useState(0);
+    const [isDragOver, setIsDragOver] = useState(false);
+    const dropZoneRef = useRef(null);
+    const fileInputRef = useRef(null);
 
-    const handleFileChange = (e) => {
-        const files = Array.from(e.target.files);
+    const handleFileChange = (filesList) => {
+        const files = Array.from(filesList);
         const pdfFiles = files.filter(
             (file) => file.type === "application/pdf"
         );
@@ -50,7 +54,59 @@ export default function PDFInput() {
         setPreviewFile(null);
     };
 
-    const handleUpload = async () => {};
+    // Drag event handlers
+    const handleDragEnter = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragCounter((prev) => prev + 1);
+
+        if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+            setIsDragOver(true);
+        }
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragCounter((prev) => {
+            const newCount = prev - 1;
+
+            if (newCount === 0) {
+                setIsDragOver(false);
+            }
+
+            return newCount;
+        });
+
+        // Only hide drag overlay when counter reaches 0
+        // This prevents flickering when dragging over child elements
+        if (dragCounter === 0) {
+            setIsDragOver(false);
+        }
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        setIsDragOver(false);
+        setDragCounter(0);
+
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleFileChange(e.dataTransfer.files);
+            e.dataTransfer.clearData();
+        }
+    };
+
+    const openFileDialog = (e) => {
+        e.stopPropagation();
+        fileInputRef.current?.click();
+    };
 
     return (
         <div>
@@ -59,30 +115,38 @@ export default function PDFInput() {
                 <label className="block text-gray-700 font-bold mb-2">
                     Select PDF Files
                 </label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors">
+
+                <div>
                     <input
+                        ref={fileInputRef}
                         type="file"
                         multiple
                         accept=".pdf"
-                        onChange={handleFileChange}
-                        onDrop={(e) => {
-                            console.log("inside drop");
-                        }}
+                        onChange={(e) => handleFileChange(e.target.files)}
                         className="hidden"
-                        id="pdf-upload"
                     />
-                    <label
-                        htmlFor="pdf-upload"
-                        className="cursor-pointer flex flex-col items-center gap-4"
+
+                    <div
+                        className={`border-2 border-dashed rounded-lg p-8 text-center hover:border-blue-500 hover:cursor-pointer transition-colors ${
+                            isDragOver ? `border-blue-500` : `border-gray-300`
+                        }`}
+                        ref={dropZoneRef}
+                        onDragEnter={handleDragEnter}
+                        onDragLeave={handleDragLeave}
+                        onDragOver={handleDragOver}
+                        onDrop={handleDrop}
+                        onClick={openFileDialog}
                     >
-                        <LuUpload size="3rem" color="gray" />
-                        <p className="text-gray-600">
-                            Click to select PDF files or drag and drop
-                        </p>
-                        <p className="text-sm text-gray-500">
-                            Multiple files supported
-                        </p>
-                    </label>
+                        <label className="cursor-pointer flex flex-col items-center gap-4">
+                            <LuUpload size="3rem" color="gray" />
+                            <p className="text-gray-600">
+                                Click to select PDF files or drag and drop
+                            </p>
+                            <p className="text-sm text-gray-500">
+                                Multiple files supported
+                            </p>
+                        </label>
+                    </div>
                 </div>
             </div>
 
