@@ -61,6 +61,7 @@ const CreateCollectionForm = () => {
         setBehavior("");
         setURLText("");
         setURLList([]);
+        setPdfFiles([]);
         setIsLoading(false);
 
         toast.success(`Created RAG Bot ${name} Successfully`);

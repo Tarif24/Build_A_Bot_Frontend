@@ -83,6 +83,8 @@ const AddDataForm = () => {
         setName("");
         setURLText("");
         setURLList([]);
+        setExistingURLList([]);
+        setExistingPDFList([]);
         setIsLoading(false);
         navigate("/chatbot");
     };
