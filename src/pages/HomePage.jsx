@@ -82,12 +82,12 @@ const HomePage = () => {
                         {
                             role: "assistant",
                             content:
-                                "Step 3.1: Links for the data can be given now or later in the Add Data Action Type",
+                                "Step 3.1: Links and PDFs for the data can be given now or later in the Add Data Action Type",
                         },
                         {
                             role: "assistant",
                             content:
-                                "Step 3.2: The links given will be scrapped and used as the context so please include relevant links to your specialization",
+                                "Step 3.2: The links and PDFs given will be scrapped and used as the context so please include relevant links to your specialization",
                         },
                         {
                             role: "assistant",

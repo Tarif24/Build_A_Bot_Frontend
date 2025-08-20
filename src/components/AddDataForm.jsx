@@ -3,6 +3,7 @@ import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import PDFInput from "../components/PDFInput";
 
 const AddDataForm = () => {
@@ -14,14 +15,17 @@ const AddDataForm = () => {
     const [URLList, setURLList] = useState([]);
     const [pdfFiles, setPdfFiles] = useState([]);
 
-    // state to hold the existing URL list
+    // state to hold the existing URL and PDF list
     const [existingURLList, setExistingURLList] = useState([]);
+    const [existingPDFList, setExistingPDFList] = useState([]);
 
     // state to hold the list of collections from the database
     const [RAGList, setRAGList] = useState([]);
 
     // state to handle loading state
     const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     // fetch the list of collections from the database
     useEffect(() => {
@@ -36,42 +40,51 @@ const AddDataForm = () => {
         e.preventDefault();
         setIsLoading(true);
 
-        if (URLList.length === 0) {
-            alert("Please add at least one URL.");
+        if (URLList.length === 0 && pdfFiles.length === 0) {
+            alert("Please add at least one URL or PDF.");
             setIsLoading(false);
             return;
         }
+
+        const formData = new FormData();
+
+        pdfFiles.forEach((fileData, index) => {
+            formData.append("pdf", fileData.file);
+        });
 
         const RAGAddData = {
             collectionName: name,
             links: URLList,
         };
 
+        // Append the form data with the RAG bot data
+        formData.append("json", JSON.stringify(RAGAddData));
+
+        console.log("Form Data:", ...formData);
+
         const responseJSON = await fetch(`${API_URL}/addDataToRAGBot`, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(RAGAddData),
+            body: formData,
         });
 
         const response = await responseJSON.json();
 
-        if (response.validLinks.length === 0) {
-            toast.error("Failed to add data. No valid links given.");
-        } else if (response.validLinks.length !== URLList.length) {
-            toast.warning(
-                `Data Added To ${name} Successfully, but some links were invalid.`
-            );
-        } else {
-            toast.success(`Data Added To ${name} Successfully`);
-        }
+        // if (response.validLinks.length === 0) {
+        //     toast.error("Failed to add data. No valid links given.");
+        // } else if (response.validLinks.length !== URLList.length) {
+        //     toast.warning(
+        //         `Data Added To ${name} Successfully, but some links were invalid.`
+        //     );
+        // } else {
+        //     toast.success(`Data Added To ${name} Successfully`);
+        // }
 
         // reset the form input values
         setName("");
         setURLText("");
         setURLList([]);
         setIsLoading(false);
+        navigate("/chatbot");
     };
 
     const handleDeleteURL = (index) => {
@@ -86,6 +99,7 @@ const AddDataForm = () => {
     };
 
     const handleOnNameChange = async (e) => {
+        setIsLoading(true);
         setName(e.target.value);
 
         const responseJSON = await fetch(
@@ -100,7 +114,9 @@ const AddDataForm = () => {
         );
 
         const ragBot = await responseJSON.json();
-        setExistingURLList(ragBot.message.links);
+        setExistingURLList(ragBot.message.links || []);
+        setExistingPDFList(ragBot.message.files || []);
+        setIsLoading(false);
     };
 
     const handlePDFInputChange = (filesList) => {
@@ -157,14 +173,41 @@ const AddDataForm = () => {
                     <div
                         className={`${
                             existingURLList.length !== 0 ? "flex" : "hidden"
-                        } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4`}
+                        } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto`}
                         id="url-list"
                         name="url-list"
                     >
                         {existingURLList.map((url, index) => (
                             <div
                                 key={index}
-                                className="bg-gray-200 rounded-full px-4 py-2"
+                                className="bg-gray-200 rounded-full px-4 py-2  border-1 border-gray-400"
+                            >
+                                {url}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {/* Existing PDF List */}
+                <div>
+                    <label
+                        htmlFor="url-list"
+                        className={`${
+                            existingPDFList.length !== 0 ? "block" : "hidden"
+                        } text-gray-700 font-bold mb-2`}
+                    >
+                        Existing PDF List
+                    </label>
+                    <div
+                        className={`${
+                            existingPDFList.length !== 0 ? "flex" : "hidden"
+                        } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto`}
+                        id="url-list"
+                        name="url-list"
+                    >
+                        {existingPDFList.map((url, index) => (
+                            <div
+                                key={index}
+                                className="bg-gray-200 rounded-full px-4 py-2 border-1 border-gray-400"
                             >
                                 {url}
                             </div>
@@ -214,14 +257,14 @@ const AddDataForm = () => {
                     <div
                         className={`${
                             URLList.length !== 0 ? "flex" : "hidden"
-                        } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4`}
+                        } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto`}
                         id="url-list"
                         name="url-list"
                     >
                         {URLList.map((url, index) => (
                             <div
                                 key={index}
-                                className="relative bg-gray-200 rounded-full px-4 py-2"
+                                className="relative bg-gray-200 rounded-full px-4 py-2 border-1 border-gray-400"
                             >
                                 {url}
                                 <div

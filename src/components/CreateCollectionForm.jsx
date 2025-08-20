@@ -26,6 +26,12 @@ const CreateCollectionForm = () => {
         e.preventDefault();
         setIsLoading(true);
 
+        const formData = new FormData();
+
+        pdfFiles.forEach((fileData, index) => {
+            formData.append("pdf", fileData.file);
+        });
+
         const RAGBot = {
             collectionName: name,
             specialization: specialization,
@@ -36,12 +42,12 @@ const CreateCollectionForm = () => {
             links: URLList,
         };
 
+        // Append the form data with the RAG bot data
+        formData.append("json", JSON.stringify(RAGBot));
+
         const responseJSON = await fetch(`${API_URL}/createRAGBot`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(RAGBot),
+            body: formData,
         });
 
         const response = await responseJSON.json();
@@ -243,14 +249,14 @@ const CreateCollectionForm = () => {
                     <div
                         className={`${
                             URLList.length !== 0 ? "flex" : "hidden"
-                        } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto border-1 rounded p-4`}
+                        } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto`}
                         id="url-list"
                         name="url-list"
                     >
                         {URLList.map((url, index) => (
                             <div
                                 key={index}
-                                className="relative bg-gray-200 rounded-full px-4 py-2"
+                                className="relative bg-gray-200 rounded-full px-4 py-2 border-1 border-gray-400"
                             >
                                 {url}
                                 <div
