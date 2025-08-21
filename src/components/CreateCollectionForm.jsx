@@ -287,7 +287,9 @@ const CreateCollectionForm = () => {
                 </div>
             </form>
             {isLoading && (
-                <div className="absolute flex w-[100vw] h-[100vh] -top-4 left-0 justify-center items-center mt-4 bg-black opacity-50">
+                <div
+                    className={`absolute flex w-[100vw] h-[100vh] -top-4 left-0 justify-center items-center mt-4 bg-black opacity-50`}
+                >
                     <ClipLoader
                         color="#6e6e6e"
                         loading={isLoading}
