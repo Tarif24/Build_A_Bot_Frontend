@@ -37,6 +37,7 @@ const ScrollLock = (isLocked) => {
         }
 
         return () => {
+            // Cleanup styles on unmount
             document.body.style.removeProperty("overflow");
             document.body.style.removeProperty("position");
             document.body.style.removeProperty("top");

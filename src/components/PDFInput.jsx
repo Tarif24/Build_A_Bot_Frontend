@@ -60,6 +60,8 @@ export default function PDFInput({ onPDFInputChange }) {
     };
 
     // Drag event handlers
+    // prevent default behavior for all the drag events because they block drag by default
+    // stopPropagation to prevent the event from bubbling up
     const handleDragEnter = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -102,6 +104,7 @@ export default function PDFInput({ onPDFInputChange }) {
         }
     };
 
+    // Open file dialog when the drop zone is clicked since the input is hidden
     const openFileDialog = (e) => {
         e.stopPropagation();
         fileInputRef.current?.click();

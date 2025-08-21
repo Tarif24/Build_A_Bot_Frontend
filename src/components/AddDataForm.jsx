@@ -47,6 +47,8 @@ const AddDataForm = () => {
             return;
         }
 
+        // The body of the request is a FormData object
+        // which allows us to send files and text data together
         const formData = new FormData();
 
         pdfFiles.forEach((fileData, index) => {

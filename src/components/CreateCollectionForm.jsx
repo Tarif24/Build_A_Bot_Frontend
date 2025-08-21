@@ -27,6 +27,7 @@ const CreateCollectionForm = () => {
         e.preventDefault();
         setIsLoading(true);
 
+        // The body is a FormData object to handle file uploads and json data
         const formData = new FormData();
 
         pdfFiles.forEach((fileData, index) => {
