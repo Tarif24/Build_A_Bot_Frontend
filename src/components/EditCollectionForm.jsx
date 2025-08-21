@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import ScrollLock from "../helper/ScrollLock";
 
 const EditCollectionForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -83,12 +84,7 @@ const EditCollectionForm = () => {
         setIsLoading(false);
     };
 
-    if (isLoading) {
-        window.scrollTo(0, 0);
-        document.body.style.overflow = "hidden";
-    } else {
-        document.body.style.overflow = "auto";
-    }
+    ScrollLock(isLoading);
 
     return (
         <>

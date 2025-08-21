@@ -5,6 +5,7 @@ import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import PDFInput from "../components/PDFInput";
+import ScrollLock from "../helper/ScrollLock";
 
 const AddDataForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -125,12 +126,7 @@ const AddDataForm = () => {
         setPdfFiles(filesList);
     };
 
-    if (isLoading) {
-        window.scrollTo(0, 0);
-        document.body.style.overflow = "hidden";
-    } else {
-        document.body.style.overflow = "auto";
-    }
+    scrollLock(isLoading);
 
     return (
         <>

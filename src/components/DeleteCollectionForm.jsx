@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import ScrollLock from "../helper/ScrollLock";
 
 const DeleteCollectionForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -45,12 +46,7 @@ const DeleteCollectionForm = () => {
         toast.success(`Deleted RAG Bot ${name} Successfully`);
     };
 
-    if (isLoading) {
-        window.scrollTo(0, 0);
-        document.body.style.overflow = "hidden";
-    } else {
-        document.body.style.overflow = "auto";
-    }
+    ScrollLock(isLoading);
 
     return (
         <>

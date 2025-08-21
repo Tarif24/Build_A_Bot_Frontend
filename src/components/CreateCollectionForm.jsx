@@ -4,6 +4,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import PDFInput from "../components/PDFInput";
+import ScrollLock from "../helper/ScrollLock";
 
 const CreateCollectionForm = () => {
     const API_URL = import.meta.env.VITE_RAG_CHAT_API_URL;
@@ -82,16 +83,14 @@ const CreateCollectionForm = () => {
         setPdfFiles(filesList);
     };
 
-    if (isLoading) {
-        window.scrollTo(0, 0);
-        document.body.style.overflow = "hidden";
-    } else {
-        document.body.style.overflow = "auto";
-    }
+    ScrollLock(isLoading);
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form
+                onSubmit={handleSubmit}
+                className={`space-y-4 ${isLoading && "overflow-hidden"}`}
+            >
                 {/* NAME */}
                 <div>
                     <label
@@ -273,12 +272,10 @@ const CreateCollectionForm = () => {
                         ))}
                     </div>
                 </div>
-
                 {/* PDF Input */}
                 <div>
                     <PDFInput onPDFInputChange={handlePDFInputChange} />
                 </div>
-
                 {/* Submit Button */}
                 <div>
                     <button
