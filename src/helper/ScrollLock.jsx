@@ -19,6 +19,8 @@ const ScrollLock = (isLocked) => {
             //document.body.style.top = `-${scrollPosition.current}px`;
             document.body.style.width = "100%";
             document.body.style.paddingRight = `${scrollbarWidth}px`;
+            document.body.style.backgroundColor = "rgb(230, 231, 235)";
+            //document.body.style.borderTop = "10vh solid #4a5666";
         } else {
             // Restore styles
             document.body.style.removeProperty("overflow");
@@ -26,7 +28,8 @@ const ScrollLock = (isLocked) => {
             document.body.style.removeProperty("top");
             document.body.style.removeProperty("width");
             document.body.style.paddingRight = "0px";
-            //document.body.style.removeProperty("paddingRight");
+            document.body.style.backgroundColor = "rgb(255, 255, 255)";
+            //document.body.style.borderTop = "opx solid #4a5666";
 
             // Restore scroll position
             //window.scrollTo(0, scrollPosition.current);
@@ -39,7 +42,8 @@ const ScrollLock = (isLocked) => {
             document.body.style.removeProperty("top");
             document.body.style.removeProperty("width");
             document.body.style.paddingRight = "0px";
-            //document.body.style.removeProperty("paddingRight");
+            document.body.style.backgroundColor = "rgb(255, 255, 255)";
+            //document.body.style.borderTop = "0px solid #4a5666";
         };
     }, [isLocked]);
 };
