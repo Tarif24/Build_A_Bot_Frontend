@@ -22,11 +22,13 @@ const EditCollectionForm = () => {
 
     // fetch the list of collections from the database
     useEffect(() => {
+        setIsLoading(true);
         fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
             .then((response) => response.json())
             .then((data) => {
                 setRAGList(data);
             });
+        setIsLoading(false);
     }, []);
 
     const handleSubmit = async (e) => {
@@ -52,7 +54,7 @@ const EditCollectionForm = () => {
 
         const response = await responseJSON.json();
 
-        toast.success(`Edited RAG Bot ${name} Successfully`);
+        (response.success ? toast.success : toast.error)(response.message);
 
         setIsLoading(false);
     };

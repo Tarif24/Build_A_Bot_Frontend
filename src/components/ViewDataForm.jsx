@@ -14,6 +14,7 @@ const ViewDataForm = () => {
     const [unknown, setUnknown] = useState("");
     const [behavior, setBehavior] = useState("");
     const [existingURLList, setExistingURLList] = useState([]);
+    const [existingPDFList, setExistingPDFList] = useState([]);
 
     // state to hold the list of collections from the database
     const [RAGList, setRAGList] = useState([]);
@@ -23,11 +24,13 @@ const ViewDataForm = () => {
 
     // fetch the list of collections from the database
     useEffect(() => {
+        setIsLoading(true);
         fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
             .then((response) => response.json())
             .then((data) => {
                 setRAGList(data);
             });
+        setIsLoading(false);
     }, []);
 
     const nameChangeHandler = async (e) => {
@@ -55,6 +58,7 @@ const ViewDataForm = () => {
         setUnknown(ragbot.unknown);
         setBehavior(ragbot.behavior);
         setExistingURLList(ragbot.links);
+        setExistingPDFList(ragbot.files);
         setIsLoading(false);
     };
 
@@ -174,6 +178,35 @@ const ViewDataForm = () => {
                             name="url-list"
                         >
                             {existingURLList.map((url, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-gray-200 rounded-full px-4 py-2"
+                                >
+                                    {url}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    {/* Existing PDF List */}
+                    <div>
+                        <label
+                            htmlFor="url-list"
+                            className={`${
+                                existingURLList.length !== 0
+                                    ? "block"
+                                    : "hidden"
+                            } text-gray-700 font-bold mb-2`}
+                        >
+                            Existing PDF List
+                        </label>
+                        <div
+                            className={`${
+                                existingPDFList.length !== 0 ? "flex" : "hidden"
+                            } flex-col gap-2 mb-4 max-h-[10rem] overflow-y-auto`}
+                            id="url-list"
+                            name="url-list"
+                        >
+                            {existingPDFList.map((url, index) => (
                                 <div
                                     key={index}
                                     className="bg-gray-200 rounded-full px-4 py-2"

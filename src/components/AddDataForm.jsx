@@ -30,11 +30,13 @@ const AddDataForm = () => {
 
     // fetch the list of collections from the database
     useEffect(() => {
+        setIsLoading(true);
         fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
             .then((response) => response.json())
             .then((data) => {
                 setRAGList(data);
             });
+        setIsLoading(false);
     }, []);
 
     const handleSubmit = async (e) => {
@@ -72,15 +74,7 @@ const AddDataForm = () => {
 
         const response = await responseJSON.json();
 
-        // if (response.validLinks.length === 0) {
-        //     toast.error("Failed to add data. No valid links given.");
-        // } else if (response.validLinks.length !== URLList.length) {
-        //     toast.warning(
-        //         `Data Added To ${name} Successfully, but some links were invalid.`
-        //     );
-        // } else {
-        //     toast.success(`Data Added To ${name} Successfully`);
-        // }
+        (response.success ? toast.success : toast.error)(response.message);
 
         // reset the form input values
         setName("");
@@ -128,7 +122,7 @@ const AddDataForm = () => {
         setPdfFiles(filesList);
     };
 
-    scrollLock(isLoading);
+    ScrollLock(isLoading);
 
     return (
         <>

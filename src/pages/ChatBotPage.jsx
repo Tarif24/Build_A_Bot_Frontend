@@ -66,6 +66,11 @@ const ChatBotPage = () => {
 
             const response = await responseJSON.json();
 
+            if (!response.success) {
+                toast.error(response.message);
+                return;
+            }
+
             setChatHistory((prev) => [
                 ...prev,
                 { role: "assistant", content: response.message },

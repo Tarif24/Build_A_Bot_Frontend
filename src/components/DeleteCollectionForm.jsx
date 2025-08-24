@@ -17,12 +17,14 @@ const DeleteCollectionForm = () => {
     // fetch the list of collections from the database
     useEffect(() => {
         if (shouldFetch) {
+            setIsLoading(true);
             fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
                 .then((response) => response.json())
                 .then((data) => {
                     setRAGList(data);
                     setShouldFetch(false); // Reset after fetching
                 });
+            setIsLoading(false);
         }
     }, [shouldFetch]);
 
@@ -40,10 +42,11 @@ const DeleteCollectionForm = () => {
 
         const response = await responseJSON.json();
 
+        (response.success ? toast.success : toast.error)(response.message);
+
         setName("");
         setIsLoading(false);
         setShouldFetch(true);
-        toast.success(`Deleted RAG Bot ${name} Successfully`);
     };
 
     ScrollLock(isLoading);

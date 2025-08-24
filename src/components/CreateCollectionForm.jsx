@@ -66,7 +66,7 @@ const CreateCollectionForm = () => {
         setPdfFiles([]);
         setIsLoading(false);
 
-        toast.success(`Created RAG Bot ${name} Successfully`);
+        (response.success ? toast.success : toast.error)(response.message);
     };
 
     const handleDeleteURL = (index) => {
