@@ -1,8 +1,10 @@
 import Hero from "../components/Hero";
 import ChatTextDisplay from "../components/ChatTextDisplay";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
     document.body.style.overflow = "auto";
+    const navigate = useNavigate();
 
     return (
         <div className="flex flex-col justify-center items-center bg-gray-200">
@@ -145,6 +147,12 @@ const HomePage = () => {
                     ]}
                 />
             </div>
+            <button
+                className="bg-blue-500 hover:bg-blue-600 hover:cursor-pointer hover:scale-125 text-4xl text-white font-bold py-4 px-6 rounded-full mb-10 transition duration-300"
+                onClick={() => navigate("/data")}
+            >
+                Wanna Build A Bot?
+            </button>
         </div>
     );
 };
