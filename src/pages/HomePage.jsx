@@ -151,7 +151,7 @@ const HomePage = () => {
                 className="bg-blue-500 hover:bg-blue-600 hover:cursor-pointer hover:scale-125 text-4xl text-white font-bold py-4 px-6 rounded-full mb-10 transition duration-300"
                 onClick={() => navigate("/data")}
             >
-                Wanna Build A Bot
+                Wanna Build A Bot!
             </button>
         </div>
     );
