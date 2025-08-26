@@ -5,7 +5,7 @@ on:
         branches: [main]
 
 jobs:
-    build-and-deploy:
+    deploy:
         runs-on: ubuntu-latest
 
         steps:
@@ -21,10 +21,13 @@ jobs:
             - name: Install dependencies
               run: npm ci
 
+            - name: Run tests
+              run: npm test
+
             - name: Build application
               run: npm run build
 
-            - name: Prepare deployment directory
+            - name: Debug and prepare deployment
               uses: appleboy/ssh-action@v1.0.3
               with:
                   host: ${{ secrets.SSH_HOST }}
@@ -33,10 +36,19 @@ jobs:
                   passphrase: ${{ secrets.SSH_PASSPHRASE }}
                   port: ${{ secrets.SSH_PORT }}
                   script: |
-                      # Remove existing files and recreate directory
-                      rm -rf /public_html/buildabot
-                      mkdir -p /public_html/buildabot
-                      chmod 755 /public_html/buildabot
+                      echo "Current user: $(whoami)"
+                      echo "Current directory: $(pwd)"
+                      echo "Home directory contents:"
+                      ls -la
+                      echo "Checking public_html permissions:"
+                      ls -la public_html/ || echo "public_html not found at root"
+
+                      # Try relative path instead of absolute
+                      rm -rf public_html/buildabot
+                      mkdir -p public_html/buildabot
+                      chmod 755 public_html/buildabot
+
+                      echo "Directory created successfully"
 
             - name: Deploy files via SSH
               uses: appleboy/scp-action@v0.1.4
@@ -47,7 +59,7 @@ jobs:
                   passphrase: ${{ secrets.SSH_PASSPHRASE }}
                   port: ${{ secrets.SSH_PORT }}
                   source: "dist/*"
-                  target: "/public_html/buildabot/"
+                  target: "public_html/buildabot/"
                   strip_components: 1
 
             - name: Deployment Success
