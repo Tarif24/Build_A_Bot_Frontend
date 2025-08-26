@@ -127,12 +127,12 @@ const HomePage = () => {
                         {
                             role: "assistant",
                             content:
-                                "Edit collection by going to the Data page and selecting Edit Collection",
+                                "Add your resume as data and ask the bot about yourself, tell it to act as if the audience is a hiring manager and see how it responds",
                         },
                         {
                             role: "assistant",
                             content:
-                                "View the custom behavior of your bot by going to the Data page and selecting View Data",
+                                "Edit collection by going to the Data page and selecting Edit Collection",
                         },
                         {
                             role: "assistant",
@@ -151,7 +151,7 @@ const HomePage = () => {
                 className="bg-blue-500 hover:bg-blue-600 hover:cursor-pointer hover:scale-125 text-4xl text-white font-bold py-4 px-6 rounded-full mb-10 transition duration-300"
                 onClick={() => navigate("/data")}
             >
-                Wanna Build A Bot!
+                Wanna Build A Bot?
             </button>
         </div>
     );
