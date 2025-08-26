@@ -33,6 +33,16 @@ jobs:
                   CI: false # Prevents warnings from being treated as errors
                   VITE_RAG_CHAT_API_URL: ${{ secrets.VITE_RAG_CHAT_API_URL }}
 
+            - name: Clean target directory
+              uses: appleboy/ssh-action@v1.0.3
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USERNAME }}
+                  key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  port: ${{ secrets.SSH_PORT }}
+                  script: |
+                      rm -rf /public_html/buildabot/*
+
             # Deploy to Hostinger via SSH
             - name: Deploy to Hostinger via SSH
               uses: appleboy/scp-action@v0.1.4
