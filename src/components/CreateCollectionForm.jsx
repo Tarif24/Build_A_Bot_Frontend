@@ -34,8 +34,10 @@ const CreateCollectionForm = () => {
             formData.append("pdf", fileData.file);
         });
 
+        const fixedName = name.replaceAll(" ", "_");
+
         const RAGBot = {
-            collectionName: name,
+            collectionName: fixedName,
             specialization: specialization,
             tone: tone,
             audience: audience,

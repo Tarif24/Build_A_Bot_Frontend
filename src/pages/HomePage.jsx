@@ -70,7 +70,7 @@ const HomePage = () => {
                         {
                             role: "assistant",
                             content:
-                                "Step 1: Go to the date page on the navbar",
+                                "Step 1: Go to the data page on the navbar",
                         },
                         {
                             role: "assistant",
