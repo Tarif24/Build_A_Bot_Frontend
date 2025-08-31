@@ -4,7 +4,7 @@ import { CiFileOn } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 
-export default function PDFInput({ onPDFInputChange }) {
+export default function PDFInput({ onPDFInputChange, resetTrigger }) {
     const [previewFile, setPreviewFile] = useState(null);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [dragCounter, setDragCounter] = useState(0);
@@ -15,6 +15,11 @@ export default function PDFInput({ onPDFInputChange }) {
     useEffect(() => {
         onPDFInputChange(selectedFiles);
     }, [selectedFiles]);
+
+    // Reset selected files when parent triggers a reset (via resetTrigger prop)
+    useEffect(() => {
+        setSelectedFiles([]);
+    }, [resetTrigger]);
 
     const handleFileChange = (filesList) => {
         const files = Array.from(filesList);

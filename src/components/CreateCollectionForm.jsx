@@ -23,6 +23,9 @@ const CreateCollectionForm = () => {
     // State to manage loading state
     const [isLoading, setIsLoading] = useState(false);
 
+    // State to trigger PDFInput reset
+    const [resetTrigger, setResetTrigger] = useState(0);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -67,6 +70,7 @@ const CreateCollectionForm = () => {
         setURLList([]);
         setPdfFiles([]);
         setIsLoading(false);
+        setResetTrigger((prev) => prev + 1);
 
         (response.success ? toast.success : toast.error)(response.message);
     };
@@ -277,7 +281,10 @@ const CreateCollectionForm = () => {
                 </div>
                 {/* PDF Input */}
                 <div>
-                    <PDFInput onPDFInputChange={handlePDFInputChange} />
+                    <PDFInput
+                        onPDFInputChange={handlePDFInputChange}
+                        resetTrigger={resetTrigger}
+                    />
                 </div>
                 {/* Submit Button */}
                 <div>

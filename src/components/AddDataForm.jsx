@@ -26,6 +26,9 @@ const AddDataForm = () => {
     // state to handle loading state
     const [isLoading, setIsLoading] = useState(false);
 
+    // State to trigger PDFInput reset
+    const [resetTrigger, setResetTrigger] = useState(0);
+
     const navigate = useNavigate();
 
     // fetch the list of collections from the database
@@ -83,6 +86,7 @@ const AddDataForm = () => {
         setExistingURLList([]);
         setExistingPDFList([]);
         setIsLoading(false);
+        setResetTrigger((prev) => prev + 1);
         navigate("/chatbot");
     };
 
@@ -277,7 +281,10 @@ const AddDataForm = () => {
 
                 {/* PDF Input */}
                 <div>
-                    <PDFInput onPDFInputChange={handlePDFInputChange} />
+                    <PDFInput
+                        onPDFInputChange={handlePDFInputChange}
+                        resetTrigger={resetTrigger}
+                    />
                 </div>
 
                 {/* Submit Button */}
