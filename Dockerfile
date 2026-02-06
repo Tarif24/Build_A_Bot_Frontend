@@ -12,6 +12,8 @@ RUN npm install
 COPY . .
 
 # 5. Build the app for production
+ARG VITE_RAG_CHAT_API_URL
+ENV VITE_RAG_CHAT_API_URL=$VITE_RAG_CHAT_API_URL
 RUN npm run build
 
 # 6. Use a minimal Node.js image to serve the built files
