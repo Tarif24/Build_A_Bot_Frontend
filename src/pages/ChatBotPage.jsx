@@ -24,6 +24,7 @@ const ChatBotPage = () => {
 
     // Fetch all collection names from the database
     useEffect(() => {
+        console.log(`${API_URL}/getAllRAGBotCollectionsByName`);
         fetch(`${API_URL}/getAllRAGBotCollectionsByName`)
             .then((response) => response.json())
             .then((data) => {
