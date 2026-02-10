@@ -61,6 +61,7 @@ const ChatBotPage = () => {
                 body: JSON.stringify({
                     query: input,
                     collectionName: name,
+                    chatHistory: chatHistory,
                 }),
             });
 
@@ -84,7 +85,6 @@ const ChatBotPage = () => {
 
     const collectionSwitchHandler = async (e) => {
         setName(e.target.value);
-        await fetch(`${API_URL}/resetChatHistory`);
         setChatHistory([]);
     };
 
