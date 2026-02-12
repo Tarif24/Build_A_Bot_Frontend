@@ -69,7 +69,6 @@ const ChatBotPage = () => {
             });
 
             const response = await responseJSON.json();
-            console.log(response);
 
             if (!response.success) {
                 toast.error(response.message);
