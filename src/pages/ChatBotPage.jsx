@@ -61,11 +61,15 @@ const ChatBotPage = () => {
                 body: JSON.stringify({
                     query: input,
                     collectionName: name,
-                    chatHistory: chatHistory,
+                    chatHistory: [
+                        ...chatHistory,
+                        { role: "user", content: `${input}` },
+                    ],
                 }),
             });
 
             const response = await responseJSON.json();
+            console.log(response);
 
             if (!response.success) {
                 toast.error(response.message);
