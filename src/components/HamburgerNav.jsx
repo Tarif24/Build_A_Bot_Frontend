@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { LuMenu } from "react-icons/lu";
 import { IoMdClose } from "react-icons/io";
@@ -16,12 +16,18 @@ const HamburgerNav = () => {
         isActive ? "" : "hidden"
     }`;
 
-    if (isActive) {
-        window.scrollTo(0, 0);
-        document.body.style.overflow = "hidden";
-    } else {
-        document.body.style.overflow = "scroll";
-    }
+    useEffect(() => {
+        if (isActive) {
+            window.scrollTo(0, 0);
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, [isActive]);
 
     return (
         <div className="lg:hidden flex">
