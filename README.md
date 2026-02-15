@@ -1,138 +1,106 @@
-<a id="readme-top"></a>
-
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Tarif24/Job_Listing_Website_React">
+  <a href="https://buildabot.tarifmohammad.com">
     <img src="src/assets/Chat_Bot_Icon.svg" alt="Logo" width="240" height="240">
   </a>
-
-  <h3 align="center">Build A Bot Website</h3>
-
-  <p align="center">
-   A website that allows you to build and save your own customized RAG Bot
-    <br />
-    <br />
-    <br />
-    <a href="https://buildabot.tarifmohammad.com/">View Demo</a>
-    &middot;
-    <a href="https://github.com/Tarif24/Build_A_Bot_Frontend/issues/new">Report Bug</a>
-  </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+# Build A Bot – Frontend
 
-<!-- ABOUT THE PROJECT -->
+Build A Bot is a full-stack RAG chatbot builder that enables users to create custom AI chatbots powered by their own uploaded data.
 
-## About The Project
+This repository contains the React frontend responsible for user interaction, bot management, and chat interface functionality.
 
-[![Product Screen Shot][product-screenshot]][Live-Demo]
+---
 
-This website was created not only as a personal project to help me better understand how RAG (Retrieval-Augmented Generation) bots work, but also as a platform for others to experiment with building their own RAG-powered chatbot. The idea is to give users a customized chatbot experience that can be tailored to their unique needs, whether that’s answering questions, assisting with learning, or automating workflows. Working on this project gave me a much deeper appreciation for how RAG enhances traditional AI models. Instead of relying solely on the model’s pre-trained knowledge
+## 🚀 Overview
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+The frontend allows users to:
 
-### Built With
+- Create and configure custom RAG bots
+- Upload PDFs and provide URLs
+- Switch between multiple bots
+- Interact with chat interfaces in real-time
+- Reset chat sessions
+- Edit bot behavior dynamically
 
-These are all of the tools used for this project
+---
 
--   HTML
--   JavaScript
--   Tailwind CSS
--   React
--   Docker
+## 🏗 Frontend Architecture
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+The frontend is structured around:
 
-<!-- GETTING STARTED -->
+- Modular React components
+- API-driven state updates
+- Bot-based state switching
+- Client-side chat history
 
-## Getting Started
+Key design principles:
+- Clear separation between bot configuration and chat interaction
+- Predictable state updates
+- Minimal UI logic inside network layers
 
-This is only if you see a feature in this project that you like and would like to replicate or copy it
+---
 
-### Prerequisites
+## 🏗 Architecture Diagram
 
--   Install the code editor of choice (mine was VS CODE)
--   npm
+User Interface (React Components)</br>
+  ├── Bot Creation View</br>
+  ├── Bot Management View</br>
+  ├── Chat Interface</br>
+  └── Settings Panel</br>
+          ↓</br>
+API Layer (REST Calls)</br>
+          ↓</br>
+Build A Bot Backend</br>
+          ↓</br>
+AstraDB + LLM</br>
 
-```sh
-npm install npm@latest -g
-```
+---
 
-### Installation
+## 🛠 Tech Stack
 
-1. Clone the repo
-    ```sh
-    git clone https://github.com/Tarif24/Build_A_Bot_Frontend.git
-    ```
-    or just copy the zip file from this repo
-2. Install NPM packages
-    ```sh
-    npm install
-    ```
-3. Then your all good to go and can start editing the files and change it to your liking or just try out my live demo
+- React (Vite)
+- JavaScript
+- Tailwind CSS
+- React Router
+- REST API integration
+- Docker (local containerization)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+---
 
-<!-- USAGE EXAMPLES -->
+## 🔄 API Integration
 
-## Usage
+The frontend communicates with the backend via REST endpoints to:
 
-The main use of this website is to build RAG bots
+- Create bots
+- Upload data
+- Submit RAG queries
+- Modify bot attributes
+- Reset chat sessions
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Chat state is managed client-side, while contextual knowledge is retrieved server-side.
 
-<!-- CONTACT -->
+---
 
-## Contact
+## ⚖️ Design Considerations
+
+- Clear UX separation between bot creation and querying
+- Optimistic UI updates for smoother interaction
+- Error handling for ingestion and query failures
+- Designed for extensibility (future auth, sharing, analytics)
+
+---
+
+## 🌐 Live Demo
+
+https://buildabot.tarifmohammad.com/
+
+---
+
+## 📬 Contact
 
 Tarif Mohammad - [@GitHub](https://github.com/Tarif24) - [@Linkedin](https://www.linkedin.com/in/tarif-mohammad/) - Tarif24@hotmail.com
 
-Project Link: [https://github.com/Tarif24/Build_A_Bot_Frontend](https://github.com/Tarif24/Build_A_Bot_Frontend)
+Backend Link: [https://github.com/Tarif24/Build_A_Bot_Backend](https://github.com/Tarif24/Build_A_Bot_Backend) </br>
 
-Live Link: [https://buildabot.tarifmohammad.com/][Live-Demo]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-This is a list of resources that i found helpful and would like to give credit too
-
--   [JavaScript Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
--   [React Documentation](https://react.dev/)
--   [Tailwind CSS Documentation](https://tailwindcss.com/)
--   [React Icons Documentation](https://react-icons.github.io/react-icons/)
--   [React Router Dom Documentation](https://reactrouter.com/home)
--   [React Spinners Documentation](https://www.davidhu.io/react-spinners/)
--   [React Toastify Documentation](https://fkhadra.github.io/react-toastify/introduction)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[product-screenshot]: src/assets/readme_image.png
-[Live-Demo]: https://buildabot.tarifmohammad.com/
